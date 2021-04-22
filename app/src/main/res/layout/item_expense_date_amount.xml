@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        style="@style/mw"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_xs"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvExpenseDate"
+            style="@style/textLarge"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="31" />
+
+        <LinearLayout
+            style="@style/ww"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_xs">
+
+            <TextView
+                android:id="@+id/tvExpenseYearMonth"
+                style="@style/textVerySmall"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:text="1999/12" />
+
+            <TextView
+                android:id="@+id/tvExpenseDay"
+                style="@style/textSmall"
+                android:layout_width="match_parent"
+                android:background="@color/lighterGray"
+                android:gravity="center"
+                android:paddingStart="@dimen/padding_xs"
+                android:paddingEnd="@dimen/padding_xs"
+                android:text="Sun"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvExpenseIncome"
+            style="@style/textMedium"
+            android:layout_width="@dimen/no_padding"
+            android:layout_weight="0.5"
+            android:layout_height="match_parent"
+            android:gravity="right|center"
+            android:text="Rp. 1,500,000"
+            android:textColor="@color/blue" />
+
+        <TextView
+            android:id="@+id/tvExpenseOutcome"
+            style="@style/textMedium"
+            android:layout_width="@dimen/no_padding"
+            android:layout_weight="0.5"
+            android:layout_height="match_parent"
+            android:gravity="right|center"
+            android:text="Rp. 500,000"
+            android:textColor="@color/red" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

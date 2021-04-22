@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="mm">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="ww">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="mw">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="wm">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <!-- Text Sizing -->
+
+    <style name="textVerySmall" parent="ww">
+        <item name="android:textSize">8sp</item>
+    </style>
+
+    <style name="textSmall" parent="ww">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="textMedium" parent="ww">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="textLarge" parent="ww">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="textVeryLarge" parent="ww">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="textVeryBig" parent="ww">
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <!-- Padding -->
+
+    <dimen name="no_padding">0dp</dimen>
+    <dimen name="padding_xs">8dp</dimen>
+    <dimen name="padding_small">12dp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
+    <dimen name="padding_large">20dp</dimen>
+    <dimen name="padding_xl">24dp</dimen>
+
+    <dimen name="padding_sl">32dp</dimen>
+    <dimen name="padding_vl">40dp</dimen>
+    <dimen name="padding_xxl">64dp</dimen>
+
+</resources>

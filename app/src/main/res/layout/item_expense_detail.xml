@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        style="@style/mw"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_xs">
+
+        <TextView
+            android:id="@+id/tvExpenseDate"
+            style="@style/textLarge"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Category" />
+
+        <LinearLayout
+            style="@style/ww"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_xs">
+
+            <TextView
+                android:id="@+id/tvExpenseYearMonth"
+                style="@style/textSmall"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:text="Food Name" />
+
+            <TextView
+                android:id="@+id/tvExpenseDay"
+                style="@style/textSmall"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:paddingStart="@dimen/padding_xs"
+                android:paddingEnd="@dimen/padding_xs"
+                android:text="Payment Method"
+                android:textColor="@color/lighterGray" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tvExpenseOutcome"
+            style="@style/textMedium"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right|center"
+            android:text="Rp. 50,000"
+            android:textColor="@color/red" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
