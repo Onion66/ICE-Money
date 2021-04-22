@@ -10,14 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ICEMoney">
         <activity
-            android:name=".HomeActivity"
-            android:label="@string/title_activity_home"></activity>
+            android:name=".MainActivity"
+            android:label="@string/title_activity_home"/>
         <activity
             android:name=".SplashScreenActivity"
             android:theme="@style/SplashScreenTheme" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

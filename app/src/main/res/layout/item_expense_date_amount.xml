@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tvExpenseDate"
+            android:id="@+id/tvTransactionDate"
             style="@style/textLarge"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -26,14 +26,14 @@
             android:padding="@dimen/padding_xs">
 
             <TextView
-                android:id="@+id/tvExpenseYearMonth"
+                android:id="@+id/tvTransactionYearMonth"
                 style="@style/textVerySmall"
                 android:layout_width="match_parent"
                 android:gravity="center"
                 android:text="1999/12" />
 
             <TextView
-                android:id="@+id/tvExpenseDay"
+                android:id="@+id/tvTransactionDay"
                 style="@style/textSmall"
                 android:layout_width="match_parent"
                 android:background="@color/lighterGray"
@@ -46,7 +46,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvExpenseIncome"
+            android:id="@+id/tvTransactionIncome"
             style="@style/textMedium"
             android:layout_width="@dimen/no_padding"
             android:layout_weight="0.5"
@@ -56,7 +56,7 @@
             android:textColor="@color/blue" />
 
         <TextView
-            android:id="@+id/tvExpenseOutcome"
+            android:id="@+id/tvTransactionOutcome"
             style="@style/textMedium"
             android:layout_width="@dimen/no_padding"
             android:layout_weight="0.5"
