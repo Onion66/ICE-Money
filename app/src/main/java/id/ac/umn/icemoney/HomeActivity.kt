@@ -1,12 +1,14 @@
 package id.ac.umn.icemoney
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.database.FirebaseDatabase
 
 class HomeActivity : AppCompatActivity() {
 
@@ -23,6 +25,14 @@ class HomeActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
             )
         )
+
+        //checking db Connection
+        var database = FirebaseDatabase.getInstance().reference
+        if (database != null){
+            database.setValue("Test!!!!!!!!!!!!!!!!")
+            Log.i("database", "test")
+        }
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

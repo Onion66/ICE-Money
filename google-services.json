@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "974804379276",
+    "firebase_url": "https://ice-money-36263-default-rtdb.firebaseio.com",
     "project_id": "ice-money-36263",
     "storage_bucket": "ice-money-36263.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "974804379276-2m8j2mq36t3d7ufr808sp5v1mc662u01.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.ac.umn.icemoney",
+            "certificate_hash": "f39f8229083330cde7f28eec958ecebc09b0ac19"
+          }
+        },
         {
           "client_id": "974804379276-0pes8ruuo4pleinn06tuls3mg9uksqsu.apps.googleusercontent.com",
           "client_type": 3
