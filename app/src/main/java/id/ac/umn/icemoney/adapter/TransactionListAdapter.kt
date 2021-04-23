@@ -8,6 +8,7 @@ import id.ac.umn.icemoney.R
 import id.ac.umn.icemoney.model.Transaction
 import kotlinx.android.synthetic.main.item_expense_date_amount.view.*
 import kotlinx.android.synthetic.main.item_expense_detail.view.*
+import java.lang.IllegalArgumentException
 
 class TransactionListAdapter(
     private val transaction: List<Transaction>
@@ -47,9 +48,22 @@ class TransactionListAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionDetailHolder {
-        return TransactionDetailHolder(LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_expense_date_amount, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            0 -> {
+                val view = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_expense_date_amount, parent, false)
+                TransactionDateHolder(view)
+            }
+            1 -> {
+                val view = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_expense_detail, parent, false)
+                TransactionDetailHolder(view)
+            }
+            else -> {
+                throw IllegalArgumentException("Invalid ViewType")
+            }
+        }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -60,7 +74,7 @@ class TransactionListAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return position % 2 * 2
+        return position
     }
 
     override fun getItemCount(): Int = transaction.size

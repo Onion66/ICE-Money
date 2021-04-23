@@ -36,11 +36,12 @@ class HomeFragment : Fragment() {
         return root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        rvTransactionList.apply {
-            layoutManager = LinearLayoutManager(this@HomeFragment.activity)
-            adapter = TransactionListAdapter(
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if(context!=null){
+            rvTransactionList.apply {
+                layoutManager = LinearLayoutManager(activity)
+                adapter = TransactionListAdapter(
                 listOf(
                     Transaction(
                         1,
@@ -62,6 +63,7 @@ class HomeFragment : Fragment() {
                     )
                 )
             )
+        }
         }
     }
 }
