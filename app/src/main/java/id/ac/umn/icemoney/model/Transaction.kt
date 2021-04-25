@@ -1,12 +1,12 @@
 package id.ac.umn.icemoney.model
 
-import java.util.Date
+import org.threeten.bp.LocalDateTime
 
 data class Transaction(
     val id: Long,
     val amount: Long,
     val category: String,
-    val date: Date,
+    val date: LocalDateTime,
     val isIncome: Boolean = true,
     val name: String,
     val paymentMethod: String,

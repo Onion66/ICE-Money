@@ -47,7 +47,7 @@
 
 
         <TextView
-            android:id="@+id/tvTransactionItemOutcome"
+            android:id="@+id/tvTransactionItemAmount"
             style="@style/textMedium"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
