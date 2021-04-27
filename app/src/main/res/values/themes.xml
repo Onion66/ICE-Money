@@ -15,10 +15,21 @@
         <item name="android:fontFamily">@font/plus_jakarta_sans_regular</item>
 
     </style>
+
     <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxStrokeColor">@color/purple_200</item>
     </style>
+
     <style name="SplashScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
     </style>
+
+    <style name="Theme.ICEMoney.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.ICEMoney.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.ICEMoney.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

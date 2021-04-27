@@ -13,8 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ICEMoney">
         <activity
+            android:name=".AddTransaction"
+            android:label="@string/title_activity_add_transaction"
+            android:theme="@style/Theme.ICEMoney.NoActionBar"></activity>
+        <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_home"/>
+            android:label="@string/title_activity_home" />
         <activity
             android:name=".SplashScreenActivity"
             android:theme="@style/SplashScreenTheme" />

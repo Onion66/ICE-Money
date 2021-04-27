@@ -1,6 +1,5 @@
 package id.ac.umn.icemoney.adapter
 
-import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -38,13 +37,6 @@ class TransactionListAdapter(
             else transIn.visibility = View.VISIBLE
             if (transaction.expense == 0.toLong()) transOut.visibility = View.GONE
             else transOut.visibility = View.VISIBLE
-//            if (transaction.isIncome) {
-//                transIn.text = "Rp." + transaction.amount.toString()
-//                transOut.text = "Rp. 0"
-//            } else {
-//                transOut.text = "Rp." + transaction.amount.toString()
-//                transIn.text = "Rp. 0"
-//            }
         }
     }
 
@@ -83,23 +75,6 @@ class TransactionListAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
-
-//        var date: LocalDateTime
-//        var income: Long = 0
-//        var expense: Long = 0
-//        for ((idx, list) in transaction.withIndex()) {
-//            date = list[idx].date
-//            for (item in list) {
-//                if (item.isIncome) income += item.amount
-//                else expense += item.amount
-//                (holder as TransactionDetailHolder).bindView(item)
-//            }
-//            (holder as TransactionDateHolder).bindView(income, expense, date)
-//            income = 0
-//            expense = 0
-//        }
-
         when (holder.itemViewType) {
             VIEW_TYPE_SUM -> (holder as TransactionDateHolder).bindView(transactions[position] as TransactionSummary)
             VIEW_TYPE_DETAIL -> (holder as TransactionDetailHolder).bindView(transactions[position] as Transaction)
