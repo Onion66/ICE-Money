@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "1047311817836",
-    "project_id": "ice-expense",
-    "storage_bucket": "ice-expense.appspot.com"
+    "project_number": "943817560815",
+    "project_id": "icemoney-b9bd3",
+    "storage_bucket": "icemoney-b9bd3.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1047311817836:android:af8f607df3573c5d02cc49",
+        "mobilesdk_app_id": "1:943817560815:android:88ca0eb3b8fa8a86f6411a",
         "android_client_info": {
           "package_name": "id.ac.umn.icemoney"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1047311817836-4n68m4p0chnguijprbvdgokv68lj5ndv.apps.googleusercontent.com",
+          "client_id": "943817560815-2o3cnfo5cifoeh8u8jkdljriblhkaj0a.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBINHVhyZWaNe7VxBNeWeKpjvAZZw_v4CU"
+          "current_key": "AIzaSyDIffnyBq6BKYWmCQ5zI8pCiNy3uqIb7F0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1047311817836-4n68m4p0chnguijprbvdgokv68lj5ndv.apps.googleusercontent.com",
+              "client_id": "943817560815-2o3cnfo5cifoeh8u8jkdljriblhkaj0a.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

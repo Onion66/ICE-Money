@@ -1,8 +1,10 @@
 package id.ac.umn.icemoney
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 import java.io.IOException
@@ -13,6 +15,13 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
         splash_image.setImageBitmap(getBitmapFromAssets("splash_image.png"))
+
+        // Move to LoginActivity after 1 seconds
+        Handler().postDelayed({
+            Intent(this, LoginActivity::class.java).also{
+                startActivity(it)
+            }
+        }, 1000)
     }
     private fun getBitmapFromAssets(fileName: String): Bitmap? {
         val am = assets

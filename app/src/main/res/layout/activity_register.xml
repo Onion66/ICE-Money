@@ -102,13 +102,13 @@
         android:layout_marginStart="128dp"
         android:layout_marginEnd="128dp"
         android:layout_marginBottom="16dp"
-        android:onClick="loginClick"
-        android:text="Login"
+        android:onClick=""
+        android:text="Register"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:cornerRadius="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/tvRegister"
+        app:layout_constraintBottom_toTopOf="@+id/tvLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -116,7 +116,7 @@
         tools:ignore="OnClick" />
 
     <TextView
-        android:id="@+id/tvRegister"
+        android:id="@+id/tvLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
