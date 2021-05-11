@@ -18,25 +18,32 @@ class RegisterActivity : AppCompatActivity() {
 
                 auth = FirebaseAuth.getInstance()
 
-                submitButton.setOnClickListener{
-                        val email = usernameText.text.toString().trim()
+                registerButton.setOnClickListener{
+                        val email = emailText.text.toString().trim()
                         val password = passwordText.text.toString().trim()
+                        val confirmpassword = confirmPasswordText.text.toString().trim()
 
                         if(email.isEmpty()){
-                                usernameText.error = "Email harus diisi"
-                                usernameText.requestFocus()
+                                emailText.error = "Email harus diisi"
+                                emailText.requestFocus()
                                 return@setOnClickListener
                         }
 
                         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                                usernameText.error = "Email tidak valid"
-                                usernameText.requestFocus()
+                                emailText.error = "Email tidak valid"
+                                emailText.requestFocus()
                                 return@setOnClickListener
                         }
 
                         if(email.isEmpty() || password.length < 6){
-                                passwordText.error = "Password harus lebih dari 6 karater"
+                                passwordText.error = "Password minimal 6 karakter"
                                 passwordText.requestFocus()
+                                return@setOnClickListener
+                        }
+
+                        if(confirmpassword != password){
+                                confirmPasswordText.error = "Password tidak sama dengan confirm password"
+                                confirmPasswordText.requestFocus()
                                 return@setOnClickListener
                         }
 

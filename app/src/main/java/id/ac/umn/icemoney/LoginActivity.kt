@@ -8,8 +8,6 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.passwordText
-import kotlinx.android.synthetic.main.activity_login.submitButton
-import kotlinx.android.synthetic.main.activity_login.tvRegister
 import kotlinx.android.synthetic.main.activity_login.usernameText
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -23,7 +21,7 @@ class LoginActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        submitButton.setOnClickListener{
+        loginButton.setOnClickListener{
             val email = usernameText.text.toString().trim()
             val password = passwordText.text.toString().trim()
 
@@ -40,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             if(password.isEmpty() || password.length < 6){
-                passwordText.error = "Password harus lebih dari 6 karater"
+                passwordText.error = "Password minimal 6 karakter"
                 passwordText.requestFocus()
                 return@setOnClickListener
             }
