@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import id.ac.umn.icemoney.LoginActivity
 import id.ac.umn.icemoney.R
 import id.ac.umn.icemoney.RegisterActivity
+import id.ac.umn.icemoney.ui.settings.SettingViewModel
 import kotlinx.android.synthetic.main.fragment_setting.*
 import java.lang.Exception
 
