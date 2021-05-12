@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
+import id.ac.umn.icemoney.AboutUsActivity
 import id.ac.umn.icemoney.LoginActivity
 import id.ac.umn.icemoney.R
 import id.ac.umn.icemoney.RegisterActivity
@@ -35,6 +36,14 @@ class SettingFragment : Fragment() {
         settingViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+
+        // About Us
+        val aboutUsButton: Button = root.findViewById(R.id.aboutUsButton)
+        aboutUsButton.setOnClickListener {
+            Intent(activity, AboutUsActivity::class.java).also {
+                startActivity(it)
+            }
+        }
 
         // Logout
         val submitBtn: Button = root.findViewById(R.id.submitButton)
