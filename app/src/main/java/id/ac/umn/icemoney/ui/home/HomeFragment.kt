@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import org.threeten.bp.LocalDateTime
 
 class HomeFragment : Fragment() {
-
+    private lateinit var transactionList: List<Transaction>
     private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(
