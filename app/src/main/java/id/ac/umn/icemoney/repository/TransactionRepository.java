@@ -18,7 +18,7 @@ public class TransactionRepository {
     public TransactionRepository(Application app){
         TransactionRoomDatabase db =
                 TransactionRoomDatabase.getDatabase(app);
-        daoTransaction = db.daoMahasiswa();
+        daoTransaction = db.daoTransaction();
         transactionList = daoTransaction.getAllTransaction();
     }
     public LiveData<List<Transaction>> getTransactionList(){
