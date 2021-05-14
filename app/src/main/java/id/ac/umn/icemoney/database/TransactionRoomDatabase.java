@@ -9,11 +9,11 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import id.ac.umn.icemoney.dao.TransactionDAO;
-import id.ac.umn.icemoney.model.Transaction;
+import id.ac.umn.icemoney.entity.Transaction;
 
 @Database(entities = {Transaction.class}, version = 1, exportSchema = false)
 public abstract class TransactionRoomDatabase extends RoomDatabase {
-    public abstract TransactionDAO daoMahasiswa();
+    public abstract TransactionDAO daoTransaction();
 
     private static TransactionRoomDatabase INSTANCE;
 
