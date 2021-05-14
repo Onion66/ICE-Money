@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import org.threeten.bp.LocalDateTime
 
 class HomeFragment : Fragment() {
-    private lateinit var transactionList: List<Transaction>
+    private lateinit var transactionList: List<id.ac.umn.icemoney.entity.Transaction>
     private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(
@@ -27,6 +27,9 @@ class HomeFragment : Fragment() {
         homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
+//        homeViewModel.getTransactionList().observe(viewLifecycleOwner, {
+//            transactionList = it
+//        })
         return root
     }
 
