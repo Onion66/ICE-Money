@@ -1,5 +1,6 @@
 package id.ac.umn.icemoney.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jakewharton.threetenabp.AndroidThreeTen
+import id.ac.umn.icemoney.AddTransaction
 import id.ac.umn.icemoney.R
 import id.ac.umn.icemoney.adapter.TransactionListAdapter
 import id.ac.umn.icemoney.entity.Transaction
@@ -36,6 +38,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initUICallBack()
         AndroidThreeTen.init(context)
         if(context != null) {
             Log.i("testDate",LocalDateTime.of(1990, 12, 31, 23, 59, 59).toString())
@@ -112,6 +115,12 @@ class HomeFragment : Fragment() {
                 }
 
             }
+        }
+    }
+
+    fun initUICallBack() {
+        fabAddTransaction.setOnClickListener {
+            getActivity()?.startActivity(Intent(activity, AddTransaction::class.java))
         }
     }
 }
