@@ -4,17 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
 import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
 import com.github.aachartmodel.aainfographics.aaoptionsmodel.AADataLabels
+import com.github.aachartmodel.aainfographics.aaoptionsmodel.AAPie
 import com.github.aachartmodel.aainfographics.aaoptionsmodel.AAStyle
 import id.ac.umn.icemoney.R
+
 
 class DashboardFragment : Fragment() {
 
@@ -36,15 +36,25 @@ class DashboardFragment : Fragment() {
         val aaChartView = root.findViewById<AAChartView>(R.id.aa_chart_view)
         val aaChartModel : AAChartModel = AAChartModel()
             .chartType(AAChartType.Pie)
-            .title("This Month")
+            .title("Pengeluaran Bulan Ini")
             .titleStyle(AAStyle().color("#00000"))
-            .subtitle("subtitle")
-            .backgroundColor("#4b2b7f")
+            .subtitle("1 Mei 2021 - 15 Mei 2021 (Now)")
+            .subtitleStyle(AAStyle().color("#00000"))
+//            .backgroundColor("#86B5FC")
             .dataLabelsEnabled(true)
-            .series(arrayOf(
-                AASeriesElement()
-                    .data(arrayOf(3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8))
-            ))
+            .series(
+                arrayOf(
+                    AASeriesElement()
+                        .name("Pengeluaran")
+                        .data(arrayOf(
+                            arrayOf<Any>("Makanan", 300000),
+                            arrayOf<Any>("Minuman", 100000),
+                            arrayOf<Any>("Transportasi", 50000),
+                            arrayOf<Any>("Pacaran", 325000)
+                        )),
+                )
+            )
+
         aaChartView.aa_drawChartWithChartModel(aaChartModel)
 
         return root
