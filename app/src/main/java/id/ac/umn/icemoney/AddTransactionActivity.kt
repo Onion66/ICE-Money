@@ -11,7 +11,7 @@ import android.view.MenuItem
 import id.ac.umn.icemoney.ui.main.SectionsPagerAdapter
 import kotlinx.android.synthetic.main.activity_add_transaction.*
 
-class AddTransaction : AppCompatActivity() {
+class AddTransactionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.30570652173913043" />
         <entry key="app/src/main/res/layout/item_expense_date_amount.xml" value="0.30570652173913043" />
         <entry key="app/src/main/res/layout/item_expense_detail.xml" value="0.30570652173913043" />
+        <entry key="app/src/main/res/layout/layout_persistent_bottom_sheet.xml" value="0.1" />
       </map>
     </option>
   </component>

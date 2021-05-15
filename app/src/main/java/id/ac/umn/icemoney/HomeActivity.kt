@@ -42,7 +42,7 @@ class HomeActivity : AppCompatActivity() {
 
 //    fun initUICallBack() {
 //        fabAddTransaction.setOnClickListener {
-//            startActivity(Intent(this, AddTransaction::class.java))
+//            startActivity(Intent(this, AddTransactionActivity::class.java))
 //        }
 //    }
 }

@@ -15,7 +15,7 @@
             android:parentActivityName=".HomeActivity"
             />
         <activity
-            android:name=".AddTransaction"
+            android:name=".AddTransactionActivity"
             android:label="@string/title_activity_add_transaction"
             android:theme="@style/Theme.ICEMoney.NoActionBar" />
         <activity
