@@ -10,27 +10,25 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.jakewharton.threetenabp.AndroidThreeTen
 import id.ac.umn.icemoney.R
 import id.ac.umn.icemoney.adapter.TransactionListAdapter
-import id.ac.umn.icemoney.model.Transaction
+import id.ac.umn.icemoney.entity.Transaction
 import id.ac.umn.icemoney.model.TransactionSummary
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.threeten.bp.LocalDateTime
 
 class HomeFragment : Fragment() {
-    private lateinit var transactionList: List<id.ac.umn.icemoney.entity.Transaction>
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var transactionList: List<Transaction>
+//    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var transactionViewModel: TransactionViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-//        homeViewModel.getTransactionList().observe(viewLifecycleOwner, {
-//            transactionList = it
-//        })
-        return root
+        transactionViewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
+//        homeViewModel =
+//            ViewModelProvider(this).get(HomeViewModel::class.java)
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
