@@ -1,4 +1,4 @@
-package id.ac.umn.icemoney.ui.home
+package id.ac.umn.icemoney.view.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,13 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jakewharton.threetenabp.AndroidThreeTen
-import id.ac.umn.icemoney.AddTransaction
+import id.ac.umn.icemoney.AddTransactionActivity
 import id.ac.umn.icemoney.R
 import id.ac.umn.icemoney.adapter.TransactionListAdapter
 import id.ac.umn.icemoney.entity.Transaction
 import id.ac.umn.icemoney.model.TransactionSummary
 import kotlinx.android.synthetic.main.fragment_home.*
-import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 
 class HomeFragment : Fragment() {
@@ -120,7 +119,7 @@ class HomeFragment : Fragment() {
 
     fun initUICallBack() {
         fabAddTransaction.setOnClickListener {
-            getActivity()?.startActivity(Intent(activity, AddTransaction::class.java))
+            getActivity()?.startActivity(Intent(activity, AddTransactionActivity::class.java))
         }
     }
 }

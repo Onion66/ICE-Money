@@ -1,4 +1,4 @@
-package id.ac.umn.icemoney.ui.dashboard
+package id.ac.umn.icemoney.view.dashboard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,14 +1,5 @@
-package id.ac.umn.icemoney.ui.home;
+package id.ac.umn.icemoney.view.home;
 
-import android.app.Application;
-
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
-
-import java.util.List;
-
-import id.ac.umn.icemoney.entity.Transaction;
 //import id.ac.umn.icemoney.repository.TransactionRepository;
 
 //public class HomeViewModel extends AndroidViewModel {
