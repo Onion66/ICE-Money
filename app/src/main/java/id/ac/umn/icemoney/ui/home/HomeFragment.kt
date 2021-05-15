@@ -19,6 +19,7 @@ class HomeFragment : Fragment() {
     private lateinit var transactionList: List<Transaction>
 //    private lateinit var homeViewModel: HomeViewModel
     private lateinit var transactionViewModel: TransactionViewModel
+    val sorted: MutableList<Any> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,7 +38,7 @@ class HomeFragment : Fragment() {
         if(context != null) {
             rvTransactionList.apply {
                 // Test RecyclerView
-                val transactions = listOf(
+                var transactions = listOf(
                     Transaction(
                         1,
                         20000,
@@ -75,29 +76,38 @@ class HomeFragment : Fragment() {
                         "Direct"
                     )
                 )
+                transactions = listOf()
 
-                val sorted: MutableList<Any> = mutableListOf()
+//                val sorted: MutableList<Any> = mutableListOf()
                 var mutableDate: LocalDateTime
                 var count = 0
                 var temp: TransactionSummary
 
-                for ((idx, item) in transactions.withIndex()) {
-                    mutableDate = item.date
-                    sorted.add(idx + count, TransactionSummary(0, 0, mutableDate))
-                    temp = sorted[idx + count] as TransactionSummary
-                    count = 0
-                    for ((i, trans) in transactions.withIndex()) {
-                        if (mutableDate == trans.date) {
-                            if (trans.isIncome) temp.income += trans.amount
-                            else temp.expense += trans.amount
-                            sorted.add(trans)
-                            count += i
+                if(transactions.isEmpty()){
+                    //if data isn't available, show the empty text
+                    noData.setVisibility(View.VISIBLE)
+                }else{
+                    //if data is available, don't show the empty text
+                    noData.setVisibility(View.INVISIBLE)
+
+                    for ((idx, item) in transactions.withIndex()) {
+                        mutableDate = item.date
+                        sorted.add(idx + count, TransactionSummary(0, 0, mutableDate))
+                        temp = sorted[idx + count] as TransactionSummary
+                        count = 0
+                        for ((i, trans) in transactions.withIndex()) {
+                            if (mutableDate == trans.date) {
+                                if (trans.isIncome) temp.income += trans.amount
+                                else temp.expense += trans.amount
+                                sorted.add(trans)
+                                count += i
+                            }
                         }
                     }
+                    layoutManager = LinearLayoutManager(activity)
+                    adapter = TransactionListAdapter(sorted.distinct())
                 }
 
-                layoutManager = LinearLayoutManager(activity)
-                adapter = TransactionListAdapter(sorted.distinct())
             }
         }
     }
