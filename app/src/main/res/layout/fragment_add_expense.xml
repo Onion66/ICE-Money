@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.main.PlaceholderFragment">
+    tools:context=".view.transaction.AddExpenseFragment">
 
     <LinearLayout
-        android:id="@+id/llMainForm"
+        android:id="@+id/llExpenseMainForm"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -19,7 +17,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tvLabelAddTransactionDate"
+                android:id="@+id/tvLabelAddExpenseDate"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -28,7 +26,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvInputAddTransactionDate"
+                android:id="@+id/tvInputAddExpenseDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_small"
@@ -42,7 +40,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tvLabelAddTransactionPayment"
+                android:id="@+id/tvLabelAddExpensePayment"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -51,7 +49,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvInputAddTransactionPayment"
+                android:id="@+id/tvInputAddExpensePayment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_small"
@@ -65,7 +63,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tvLabelAddTransactionCategory"
+                android:id="@+id/tvLabelAddExpenseCategory"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -74,7 +72,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvInputAddTransactionCategory"
+                android:id="@+id/tvInputAddExpenseCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_small"
@@ -88,7 +86,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tvLabelAddTransactionAmount"
+                android:id="@+id/tvLabelAddExpenseAmount"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -97,7 +95,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvInputAddTransactionAmount"
+                android:id="@+id/tvInputAddExpenseAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_small"
@@ -105,59 +103,6 @@
 
         </LinearLayout>
 
-        <DatePicker
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/inputBottomSheet"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/tvBottomSheetLabelInput"
-                    android:layout_width="@dimen/no_padding"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:padding="@dimen/padding_small"
-                    android:text="Amount"
-                    android:layout_weight="0.85"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:src="@drawable/ic_baseline_close_24"
-                    android:layout_width="@dimen/no_padding"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.15"
-                    android:padding="@dimen/padding_small"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </FrameLayout>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</FrameLayout>

@@ -1,4 +1,4 @@
-package id.ac.umn.icemoney.ui.setting
+package id.ac.umn.icemoney.view.setting
 
 import android.content.Intent
 import android.os.Bundle
@@ -15,9 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import id.ac.umn.icemoney.AboutUsActivity
 import id.ac.umn.icemoney.LoginActivity
 import id.ac.umn.icemoney.R
-import id.ac.umn.icemoney.RegisterActivity
-import id.ac.umn.icemoney.ui.settings.SettingViewModel
-import kotlinx.android.synthetic.main.fragment_setting.*
+import id.ac.umn.icemoney.view.settings.SettingViewModel
 import java.lang.Exception
 
 class SettingFragment : Fragment() {

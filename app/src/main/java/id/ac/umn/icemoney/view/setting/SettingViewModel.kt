@@ -1,4 +1,4 @@
-package id.ac.umn.icemoney.ui.settings
+package id.ac.umn.icemoney.view.settings
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

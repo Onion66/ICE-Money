@@ -10,7 +10,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
 
@@ -38,12 +37,12 @@ class HomeActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        initUICallBack()
+//        initUICallBack() // Moved to Home Fragment
     }
 
-    fun initUICallBack() {
-        fabAddTransaction.setOnClickListener {
-            startActivity(Intent(this, AddTransaction::class.java))
-        }
-    }
+//    fun initUICallBack() {
+//        fabAddTransaction.setOnClickListener {
+//            startActivity(Intent(this, AddTransactionActivity::class.java))
+//        }
+//    }
 }

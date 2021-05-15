@@ -1,4 +1,4 @@
-package id.ac.umn.icemoney.ui.home
+package id.ac.umn.icemoney.view.home
 
 import android.app.Application
 import androidx.lifecycle.*
