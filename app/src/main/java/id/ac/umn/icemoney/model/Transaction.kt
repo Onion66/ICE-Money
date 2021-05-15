@@ -6,7 +6,7 @@ data class Transaction(
     var id: Long,
     var amount: Long,
     var category: String,
-    var date: LocalDateTime,
+    var date: String,
     var isIncome: Boolean = true,
     var name: String,
     var paymentMethod: String,

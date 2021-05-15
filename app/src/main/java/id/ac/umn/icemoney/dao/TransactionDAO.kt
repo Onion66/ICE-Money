@@ -7,17 +7,17 @@ import id.ac.umn.icemoney.entity.Transaction
 @Dao
 interface TransactionDAO {
     @Query("SELECT * FROM `transaction`")
-    fun getAllTransaction(): LiveData<List<Transaction>>
+    fun getAllTransactions(): LiveData<List<Transaction>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertTransaction(transaction: Transaction)
+    suspend fun insertTransaction(transaction: Transaction)
 
     @Delete
-    fun deleteTransaction(transaction: Transaction)
+    suspend fun deleteTransaction(transaction: Transaction)
 
     @Update
-    fun updateTransaction(transaction: Transaction)
+    suspend fun updateTransaction(transaction: Transaction)
 
     @Query("DELETE FROM `transaction`")
-    fun deleteAllTransaction()
+    suspend fun deleteAllTransaction()
 }

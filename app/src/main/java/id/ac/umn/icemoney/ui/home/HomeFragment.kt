@@ -1,6 +1,7 @@
 package id.ac.umn.icemoney.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +11,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.jakewharton.threetenabp.AndroidThreeTen
 import id.ac.umn.icemoney.R
 import id.ac.umn.icemoney.adapter.TransactionListAdapter
-import id.ac.umn.icemoney.model.Transaction
+import id.ac.umn.icemoney.entity.Transaction
 import id.ac.umn.icemoney.model.TransactionSummary
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 
 class HomeFragment : Fragment() {
-    private lateinit var transactionList: List<id.ac.umn.icemoney.entity.Transaction>
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var transactionList: List<Transaction>
+//    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var transactionViewModel: TransactionViewModel
     val sorted: MutableList<Any> = mutableListOf()
 
     override fun onCreateView(
@@ -25,19 +28,17 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-//        homeViewModel.getTransactionList().observe(viewLifecycleOwner, {
-//            transactionList = it
-//        })
-        return root
+        transactionViewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
+//        homeViewModel =
+//            ViewModelProvider(this).get(HomeViewModel::class.java)
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         AndroidThreeTen.init(context)
         if(context != null) {
+            Log.i("testDate",LocalDateTime.of(1990, 12, 31, 23, 59, 59).toString())
             rvTransactionList.apply {
                 // Test RecyclerView
                 var transactions = listOf(
@@ -45,7 +46,7 @@ class HomeFragment : Fragment() {
                         1,
                         20000,
                         "Food",
-                        LocalDateTime.of(1990, 12, 31, 23, 59, 59),
+                        LocalDateTime.of(2021, 5, 14, 23, 59, 59).toString(),
                         false,
                         "Cheeseburger",
                         "Direct"
@@ -54,7 +55,7 @@ class HomeFragment : Fragment() {
                         2,
                         9000,
                         "Food",
-                        LocalDateTime.of(1990, 12, 30, 23, 59, 59),
+                        LocalDateTime.of(2021, 5, 13, 23, 59, 59).toString(),
                         false,
                         "Burger",
                         "Direct"
@@ -63,7 +64,7 @@ class HomeFragment : Fragment() {
                         3,
                         102000,
                         "Sales",
-                        LocalDateTime.of(1990, 12, 31, 23, 59, 59),
+                        LocalDateTime.of(2021, 5, 14, 23, 59, 59).toString(),
                         true,
                         "Selling Account",
                         "Bank"
@@ -72,13 +73,13 @@ class HomeFragment : Fragment() {
                         4,
                         18000,
                         "Food",
-                        LocalDateTime.of(1990, 12, 30, 23, 59, 59),
+                        LocalDateTime.of(2021, 5, 13, 23, 59, 59).toString(),
                         false,
                         "Hotdog",
                         "Direct"
                     )
                 )
-                transactions = listOf()
+//                transactions = listOf()
 
 //                val sorted: MutableList<Any> = mutableListOf()
                 var mutableDate: LocalDateTime
@@ -93,12 +94,12 @@ class HomeFragment : Fragment() {
                     noData.setVisibility(View.INVISIBLE)
 
                     for ((idx, item) in transactions.withIndex()) {
-                        mutableDate = item.date
+                        mutableDate = LocalDateTime.parse(item.date)
                         sorted.add(idx + count, TransactionSummary(0, 0, mutableDate))
                         temp = sorted[idx + count] as TransactionSummary
                         count = 0
                         for ((i, trans) in transactions.withIndex()) {
-                            if (mutableDate == trans.date) {
+                            if (mutableDate == LocalDateTime.parse(trans.date)) {
                                 if (trans.isIncome) temp.income += trans.amount
                                 else temp.expense += trans.amount
                                 sorted.add(trans)
