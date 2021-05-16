@@ -18,14 +18,19 @@
 
             <TextView
                 android:id="@+id/tvLabelAddIncomeDate"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="@dimen/padding_small"
-                android:text="Date"
+                android:text="Tanggal"
                 android:textStyle="bold" />
 
-            <TextView
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/darker_gray"/>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tvInputAddIncomeDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -34,6 +39,11 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,14 +51,19 @@
 
             <TextView
                 android:id="@+id/tvLabelAddIncomePayment"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="@dimen/padding_small"
-                android:text="Payment"
+                android:text="Pembayaran"
                 android:textStyle="bold" />
 
-            <TextView
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/darker_gray"/>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tvInputAddIncomePayment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -57,6 +72,11 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,14 +84,19 @@
 
             <TextView
                 android:id="@+id/tvLabelAddIncomeCategory"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="@dimen/padding_small"
-                android:text="Category"
+                android:text="Kategori"
                 android:textStyle="bold" />
 
-            <TextView
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/darker_gray"/>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tvInputAddIncomeCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -80,6 +105,11 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -87,22 +117,48 @@
 
             <TextView
                 android:id="@+id/tvLabelAddIncomeAmount"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="@dimen/padding_small"
-                android:text="Amount"
+                android:text="Jumlah"
                 android:textStyle="bold" />
 
-            <TextView
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/darker_gray"/>
+
+            <EditText
                 android:id="@+id/tvInputAddIncomeAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_small"
-                android:text="10000" />
+                android:background="@null"
+                android:inputType="number"
+                android:hint="10000" />
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_marginTop="40dp"
+            android:id="@+id/saveButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginEnd="64dp"
+            android:text="Simpan"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            tools:ignore="OnClick" />
+
     </LinearLayout>
+
 
 </FrameLayout>

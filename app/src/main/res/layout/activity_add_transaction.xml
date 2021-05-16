@@ -18,7 +18,7 @@
             android:gravity="center"
             android:minHeight="?actionBarSize"
             android:padding="@dimen/appbar_padding"
-            android:text="@string/app_name"
+            android:text="Tambah Transaksi"
             android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
 
         <com.google.android.material.tabs.TabLayout
@@ -35,13 +35,13 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabSaveTransaction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_menu_save" />
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/fabSaveTransaction"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="bottom|end"-->
+<!--        android:layout_margin="@dimen/fab_margin"-->
+<!--        app:srcCompat="@android:drawable/ic_menu_save" />-->
 
     <FrameLayout
         android:background="@drawable/bottom_sheet_background"
@@ -66,7 +66,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:padding="@dimen/padding_small"
-                    android:text="Amount"
+                    android:text="Kategori"
                     android:layout_weight="0.85"
                     android:textStyle="bold" />
 
@@ -79,6 +79,12 @@
                     android:padding="@dimen/padding_small"/>
 
             </LinearLayout>
+
+            <ListView
+                android:id="@+id/lv_input"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </ListView>
 
             <!-- Input Field Goes Here -->
 

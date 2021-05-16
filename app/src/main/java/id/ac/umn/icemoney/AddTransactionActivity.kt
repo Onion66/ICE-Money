@@ -61,11 +61,11 @@ class AddTransactionActivity : AppCompatActivity() {
     }
 
     private fun initUICallBack() {
-        fabSaveTransaction.setOnClickListener { view ->
-            Snackbar.make(view, "Successfully Added", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-            finish()
-        }
+//        fabSaveTransaction.setOnClickListener { view ->
+//            Snackbar.make(view, "Successfully Added", Snackbar.LENGTH_LONG)
+//                .setAction("Action", null).show()
+////            finish()
+//        }
 
         btnBottomSheetClose.setOnClickListener {
             fabSaveTransaction.visibility = View.VISIBLE

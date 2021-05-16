@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.snackbar.Snackbar
 import id.ac.umn.icemoney.R
+import kotlinx.android.synthetic.main.activity_add_transaction.*
 import kotlinx.android.synthetic.main.fragment_add_income.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -33,11 +35,14 @@ class AddIncomeFragment : Fragment() {
 //            param1 = it.getString(ARG_PARAM1)
 //            param2 = it.getString(ARG_PARAM2)
 //        }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initCallBack()
+        // Event Listener Here
+        initUICallBack()
     }
 
     private fun initCallBack() {
@@ -112,5 +117,24 @@ class AddIncomeFragment : Fragment() {
 //                }
             }
         var listener : TransactionListener? = null
+    }
+
+    private fun initUICallBack() {
+        saveButton.setOnClickListener { view ->
+            // TODO: Cek nilai dari tiap field
+
+            // TODO: Simpan ke DAO
+
+            // Snackbar berhasil ditambahkan
+            Snackbar.make(view, "Berhasil ditambahkan", Snackbar.LENGTH_LONG)
+                .setAction("Kembali ke Home", View.OnClickListener {
+                    activity?.finish()
+                }).show()
+
+        }
+
+//        btnBottomSheetClose.setOnClickListener {
+//            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+//        }
     }
 }
