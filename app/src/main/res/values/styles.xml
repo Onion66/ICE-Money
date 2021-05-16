@@ -60,4 +60,10 @@
     <dimen name="padding_vl">40dp</dimen>
     <dimen name="padding_xxl">64dp</dimen>
 
+    <!-- Custom Style -->
+
+    <style name="SpinnerScrollBar" parent="Widget.AppCompat.ListView.DropDown">
+        <item name="android:scrollbarThumbVertical">@color/black</item>
+    </style>
+
 </resources>

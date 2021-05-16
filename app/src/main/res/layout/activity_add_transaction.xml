@@ -21,33 +21,157 @@
             android:text="Tambah Transaksi"
             android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary" />
+        <!--        <com.google.android.material.tabs.TabLayout-->
+        <!--            android:id="@+id/tabs"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="?attr/colorPrimary" />-->
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
+    <LinearLayout
+        android:id="@+id/llTransactionMainForm"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:orientation="vertical">
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/fabSaveTransaction"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="bottom|end"-->
-<!--        android:layout_margin="@dimen/fab_margin"-->
-<!--        app:srcCompat="@android:drawable/ic_menu_save" />-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvLabelAddTransactionDate"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/padding_small"
+                android:text="Date"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvInputAddTransactionDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_small"
+                android:text="31-12-1990" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvLabelAddTransactionPayment"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/padding_small"
+                android:text="Payment"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvInputAddTransactionPayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_small"
+                android:text="Cash" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvLabelAddTransactionCategory"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/padding_small"
+                android:text="Category"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvInputAddTransactionCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_small"
+                android:text="Food" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvLabelAddTransactionAmount"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/padding_small"
+                android:text="Amount"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvInputAddTransactionAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_small"
+                android:text="10000" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvLabelAddTransactionType"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/padding_small"
+                android:text="Type"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvInputAddTransactionType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_small"
+                android:text="Expense" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--    <androidx.viewpager.widget.ViewPager-->
+    <!--        android:id="@+id/view_pager"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabSaveTransaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_menu_save" />
 
     <FrameLayout
-        android:background="@drawable/bottom_sheet_background"
         android:id="@+id/inputBottomSheet"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="250dp"
+        android:background="@drawable/bottom_sheet_background"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <LinearLayout
@@ -64,29 +188,216 @@
                     android:id="@+id/tvBottomSheetLabelInput"
                     android:layout_width="@dimen/no_padding"
                     android:layout_height="match_parent"
+                    android:layout_weight="0.85"
                     android:gravity="center"
                     android:padding="@dimen/padding_small"
                     android:text="Kategori"
-                    android:layout_weight="0.85"
                     android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/btnBottomSheetClose"
-                    android:src="@drawable/ic_baseline_close_24"
                     android:layout_width="@dimen/no_padding"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.15"
-                    android:padding="@dimen/padding_small"/>
+                    android:padding="@dimen/padding_small"
+                    android:src="@drawable/ic_baseline_close_24" />
 
             </LinearLayout>
 
-            <ListView
-                android:id="@+id/lv_input"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </ListView>
+            <!--            <ListView-->
+            <!--                android:id="@+id/lvInput"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="match_parent"-->
+            <!--                android:visibility="gone"></ListView>-->
 
-            <!-- Input Field Goes Here -->
+            <DatePicker
+                android:id="@+id/dpInputDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                android:visibility="gone" />
+
+            <com.webianks.library.scroll_choice.ScrollChoice
+                android:id="@+id/scInputType"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:scroll_atmospheric="true"
+                app:scroll_background_color="#212121"
+                app:scroll_indicator="true"
+                app:scroll_indicator_color="#000000"
+                app:scroll_indicator_size="1dp"
+                app:scroll_item_align="center"
+                app:scroll_item_text_color="#f5f5f5"
+                app:scroll_item_text_size="17sp"
+                app:scroll_selected_item_background="#000000"
+                app:scroll_selected_item_text_color="?attr/colorPrimary" />
+
+            <com.webianks.library.scroll_choice.ScrollChoice
+                android:id="@+id/scInputPayment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:scroll_atmospheric="true"
+                app:scroll_background_color="#212121"
+                app:scroll_indicator="true"
+                app:scroll_indicator_color="#000000"
+                app:scroll_indicator_size="1dp"
+                app:scroll_item_align="center"
+                app:scroll_item_text_color="#f5f5f5"
+                app:scroll_item_text_size="17sp"
+                app:scroll_selected_item_background="#000000"
+                app:scroll_selected_item_text_color="?attr/colorPrimary" />
+
+            <com.webianks.library.scroll_choice.ScrollChoice
+                android:id="@+id/scInputCategory"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:scroll_atmospheric="true"
+                app:scroll_background_color="#212121"
+                app:scroll_indicator="true"
+                app:scroll_indicator_color="#000000"
+                app:scroll_indicator_size="1dp"
+                app:scroll_item_align="center"
+                app:scroll_item_text_color="#f5f5f5"
+                app:scroll_item_text_size="17sp"
+                app:scroll_selected_item_background="#000000"
+                app:scroll_selected_item_text_color="?attr/colorPrimary" />
+
+            <LinearLayout
+                android:id="@+id/llInputAmount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnInputOne"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="0.33"
+                        android:text="1" />
+
+                    <Button
+                        android:id="@+id/btnInputTwo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="0.34"
+                        android:text="2" />
+
+                    <Button
+                        android:id="@+id/btnInputThree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="0.33"
+                        android:text="3" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnInputFour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="0.33"
+                        android:text="4" />
+
+                    <Button
+                        android:id="@+id/btnInputFive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="0.34"
+                        android:text="5" />
+
+                    <Button
+                        android:id="@+id/btnInputSix"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="0.33"
+                        android:text="6" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnInputSeven"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="0.33"
+                        android:text="7" />
+
+                    <Button
+                        android:id="@+id/btnInputEight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="0.34"
+                        android:text="8" />
+
+                    <Button
+                        android:id="@+id/btnInputNine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="0.33"
+                        android:text="9" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnInputBackSpace"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="0.33"
+                        android:drawableTop="@drawable/ic_baseline_backspace_24" />
+
+                    <Button
+                        android:id="@+id/btnInputZero"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="0.34"
+                        android:drawableTop="@drawable/ic_baseline_exposure_zero_24" />
+
+                    <Button
+                        android:id="@+id/btnInputExit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_weight="0.33"
+                        android:drawableTop="@drawable/ic_baseline_keyboard_arrow_down_24" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
