@@ -23,6 +23,7 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager, pr
     FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getItem(position: Int): Fragment {
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         return when(position) {
             0 -> AddIncomeFragment.newInstance(bottomSheetBehavior)
             1 -> AddExpenseFragment.newInstance(bottomSheetBehavior)

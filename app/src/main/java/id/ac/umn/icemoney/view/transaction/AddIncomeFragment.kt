@@ -1,5 +1,6 @@
 package id.ac.umn.icemoney.view.transaction
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -42,6 +43,7 @@ class AddIncomeFragment : Fragment() {
     private fun initCallBack() {
         // Income
         tvInputAddIncomeAmount.setOnClickListener {
+//            tvBottomSheetLabelInput.text = "Amount"
             if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             else
@@ -49,6 +51,7 @@ class AddIncomeFragment : Fragment() {
         }
 
         tvInputAddIncomeCategory.setOnClickListener {
+//            tvBottomSheetLabelInput.text = "Category"
             if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             else
@@ -56,6 +59,7 @@ class AddIncomeFragment : Fragment() {
         }
 
         tvInputAddIncomeDate.setOnClickListener {
+//            tvBottomSheetLabelInput.text = "Date"
             if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             else
@@ -63,6 +67,7 @@ class AddIncomeFragment : Fragment() {
         }
 
         tvInputAddIncomePayment.setOnClickListener {
+//            tvBottomSheetLabelInput.text = "Payment"
             if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             else
@@ -77,6 +82,15 @@ class AddIncomeFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add_income, container, false)
     }
+
+//    override fun onAttach(context: Context) {
+//        super.onAttach(context)
+//        if (context is TransactionListener) {
+//            listener = context
+//        } else {
+//            throw ClassCastException("$context must implement TransactionListener")
+//        }
+//    }
 
     companion object {
         /**
@@ -97,5 +111,6 @@ class AddIncomeFragment : Fragment() {
 //                    putString(ARG_PARAM2, param2)
 //                }
             }
+        var listener : TransactionListener? = null
     }
 }

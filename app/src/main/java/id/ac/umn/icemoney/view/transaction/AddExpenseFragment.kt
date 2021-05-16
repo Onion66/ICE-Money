@@ -1,5 +1,6 @@
 package id.ac.umn.icemoney.view.transaction
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,7 +10,6 @@ import android.widget.FrameLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import id.ac.umn.icemoney.R
 import kotlinx.android.synthetic.main.fragment_add_expense.*
-import kotlinx.android.synthetic.main.fragment_add_income.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,6 +43,7 @@ class AddExpenseFragment : Fragment() {
     private fun initCallBack() {
         // Expense
         tvInputAddExpenseAmount.setOnClickListener {
+//            tvBottomSheetLabelInput.text = "Amount"
             if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             else
@@ -50,6 +51,7 @@ class AddExpenseFragment : Fragment() {
         }
 
         tvInputAddExpenseCategory.setOnClickListener {
+//            tvBottomSheetLabelInput.text = "Category"
             if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             else
@@ -57,6 +59,7 @@ class AddExpenseFragment : Fragment() {
         }
 
         tvInputAddExpenseDate.setOnClickListener {
+//            tvBottomSheetLabelInput.text = "Date"
             if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             else
@@ -64,6 +67,7 @@ class AddExpenseFragment : Fragment() {
         }
 
         tvInputAddExpensePayment.setOnClickListener {
+//            tvBottomSheetLabelInput.text = "Payment"
             if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             else
@@ -78,6 +82,15 @@ class AddExpenseFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add_expense, container, false)
     }
+
+//    override fun onAttach(context: Context) {
+//        super.onAttach(context)
+//        if (context is TransactionListener) {
+//            AddIncomeFragment.listener = context
+//        } else {
+//            throw ClassCastException("$context must implement TransactionListener")
+//        }
+//    }
 
     companion object {
         /**
@@ -98,5 +111,6 @@ class AddExpenseFragment : Fragment() {
 //                    putString(ARG_PARAM2, param2)
 //                }
             }
+//        var listener : TransactionListener? = null
     }
 }

@@ -3,7 +3,6 @@ package id.ac.umn.icemoney
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
@@ -12,8 +11,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import id.ac.umn.icemoney.view.main.SectionsPagerAdapter
 import kotlinx.android.synthetic.main.activity_add_transaction.*
 import kotlinx.android.synthetic.main.activity_add_transaction.inputBottomSheet
-import kotlinx.android.synthetic.main.fragment_add_expense.*
-import kotlinx.android.synthetic.main.fragment_add_income.*
 
 class AddTransactionActivity : AppCompatActivity() {
     lateinit var bottomSheetBehavior: BottomSheetBehavior<FrameLayout>
@@ -39,20 +36,26 @@ class AddTransactionActivity : AppCompatActivity() {
             peekHeight = 0
             this.state = BottomSheetBehavior.STATE_COLLAPSED
         }
+
         bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                when (newState) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> Toast.makeText(this@AddTransactionActivity, "STATE_COLLAPSED", Toast.LENGTH_SHORT).show()
-                    BottomSheetBehavior.STATE_EXPANDED -> Toast.makeText(this@AddTransactionActivity, "STATE_EXPANDED", Toast.LENGTH_SHORT).show()
-                    BottomSheetBehavior.STATE_DRAGGING -> Toast.makeText(this@AddTransactionActivity, "STATE_DRAGGING", Toast.LENGTH_SHORT).show()
-                    BottomSheetBehavior.STATE_SETTLING -> Toast.makeText(this@AddTransactionActivity, "STATE_SETTLING", Toast.LENGTH_SHORT).show()
-                    BottomSheetBehavior.STATE_HIDDEN -> Toast.makeText(this@AddTransactionActivity, "STATE_HIDDEN", Toast.LENGTH_SHORT).show()
-                    else -> Toast.makeText(this@AddTransactionActivity, "OTHER_STATE", Toast.LENGTH_SHORT).show()
-                }
+//                when (newState) {
+//                    BottomSheetBehavior.STATE_COLLAPSED -> fabSaveTransaction.visibility = View.VISIBLE
+//                    BottomSheetBehavior.STATE_EXPANDED -> fabSaveTransaction.visibility = View.GONE
+//                    BottomSheetBehavior.STATE_DRAGGING -> fabSaveTransaction.visibility = View.VISIBLE
+//                    BottomSheetBehavior.STATE_SETTLING -> Toast.makeText(this@AddTransactionActivity, "STATE_SETTLING", Toast.LENGTH_SHORT).show()
+//                    BottomSheetBehavior.STATE_HIDDEN -> fabSaveTransaction.visibility = View.VISIBLE
+//                    else -> Toast.makeText(this@AddTransactionActivity, "OTHER_STATE", Toast.LENGTH_SHORT).show()
+//                }
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                Toast.makeText(this@AddTransactionActivity, "Slide", Toast.LENGTH_LONG)
+                fabSaveTransaction.visibility = View.VISIBLE
+                fabSaveTransaction.animate().scaleX(1 - slideOffset).scaleY(1 - slideOffset).setDuration(0).withEndAction {
+                    if (slideOffset == 1.0F) fabSaveTransaction.visibility = View.GONE else if (slideOffset == 0.0F) fabSaveTransaction.visibility = View.VISIBLE
+                }.withStartAction {
+                    if (slideOffset == 0.0F) fabSaveTransaction.visibility = View.VISIBLE else if (slideOffset == 1.0F) fabSaveTransaction.visibility = View.GONE
+                }.start()
             }
         })
     }
@@ -65,6 +68,7 @@ class AddTransactionActivity : AppCompatActivity() {
         }
 
         btnBottomSheetClose.setOnClickListener {
+            fabSaveTransaction.visibility = View.VISIBLE
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
     }
