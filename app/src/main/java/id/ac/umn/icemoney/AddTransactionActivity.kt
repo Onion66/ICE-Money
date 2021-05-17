@@ -1,20 +1,25 @@
 package id.ac.umn.icemoney
 
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import id.ac.umn.icemoney.entity.Transaction
+import id.ac.umn.icemoney.view.home.TransactionViewModel
 import kotlinx.android.synthetic.main.activity_add_transaction.*
 import kotlinx.android.synthetic.main.activity_add_transaction.btnBottomSheetClose
 import kotlinx.android.synthetic.main.activity_add_transaction.inputBottomSheet
 
 class AddTransactionActivity : AppCompatActivity() {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<FrameLayout>
+    private lateinit var transactionViewModel: TransactionViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        transactionViewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
         setContentView(R.layout.activity_add_transaction)
         initBottomSheet()
 
@@ -90,6 +95,17 @@ class AddTransactionActivity : AppCompatActivity() {
         fabSaveTransaction.setOnClickListener { view ->
 //            Snackbar.make(view, "Successfully Added", Snackbar.LENGTH_LONG)
 //                .setAction("Action", null).show()
+            transactionViewModel.addTransaction(
+                Transaction(
+                    date = tvInputAddTransactionDate.text.toString(),
+                    amount = tvInputAddTransactionAmount.text.toString().toLong(),
+                    isIncome = tvInputAddTransactionType.text.toString().equals("Income", true),
+                    category = tvInputAddTransactionCategory.text.toString(),
+                    paymentMethod = tvInputAddTransactionPayment.text.toString(),
+                    name = "$tvInputAddTransactionPayment $tvInputAddTransactionCategory $tvInputAddTransactionType",
+                    id = "${tvInputAddTransactionDate.text.first()}${tvInputAddTransactionAmount.text}${tvInputAddTransactionDate.text.last()}".toLong()
+                )
+            )
             finish()
         }
 
@@ -162,6 +178,11 @@ class AddTransactionActivity : AppCompatActivity() {
         }
 
         btnBottomSheetClose.setOnClickListener {
+            fabSaveTransaction.visibility = View.VISIBLE
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+
+        btnInputExit.setOnClickListener {
             fabSaveTransaction.visibility = View.VISIBLE
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }

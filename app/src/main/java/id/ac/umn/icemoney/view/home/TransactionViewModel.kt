@@ -9,8 +9,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TransactionViewModel(application: Application): AndroidViewModel(application) {
-    private lateinit var transactionList: LiveData<List<Transaction>>
-    private lateinit var transactionRepo: TransactionRepo
+    var transactionList: LiveData<List<Transaction>>
+    private var transactionRepo: TransactionRepo
 
     init {
         val transactionDAO = DataModule.getDatabase(application).transactionDao()

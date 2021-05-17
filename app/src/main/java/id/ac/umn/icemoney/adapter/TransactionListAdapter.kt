@@ -10,11 +10,14 @@ import id.ac.umn.icemoney.entity.Transaction
 import id.ac.umn.icemoney.model.TransactionSummary
 import kotlinx.android.synthetic.main.item_expense_date_amount.view.*
 import kotlinx.android.synthetic.main.item_expense_detail.view.*
+import org.threeten.bp.LocalDateTime
 import java.lang.IllegalArgumentException
 
 class TransactionListAdapter(
-    private val transactions: List<Any>
+//    private val transactions: List<Any>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    val sorted: MutableList<Any> = mutableListOf()
+
     companion object {
         const val VIEW_TYPE_SUM = 1
         const val VIEW_TYPE_DETAIL = 2
@@ -76,18 +79,41 @@ class TransactionListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder.itemViewType) {
-            VIEW_TYPE_SUM -> (holder as TransactionDateHolder).bindView(transactions[position] as TransactionSummary)
-            VIEW_TYPE_DETAIL -> (holder as TransactionDetailHolder).bindView(transactions[position] as Transaction)
+            VIEW_TYPE_SUM -> (holder as TransactionDateHolder).bindView(sorted[position] as TransactionSummary)
+            VIEW_TYPE_DETAIL -> (holder as TransactionDetailHolder).bindView(sorted[position] as Transaction)
         }
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (transactions[position] is TransactionSummary) {
+        return if (sorted[position] is TransactionSummary) {
             VIEW_TYPE_SUM
         } else {
             VIEW_TYPE_DETAIL
         }
     }
 
-    override fun getItemCount(): Int = transactions.size
+    override fun getItemCount(): Int = sorted.size
+
+    fun setData(transactionList: List<Transaction>) {
+        var mutableDate: LocalDateTime
+        var count = 0
+        var temp: TransactionSummary
+
+        for ((idx, item) in transactionList.withIndex()) {
+            mutableDate = LocalDateTime.parse(item.date)
+            sorted.add(idx + count, TransactionSummary(0, 0, mutableDate))
+            temp = sorted[idx + count] as TransactionSummary
+            count = 0
+            for ((i, trans) in transactionList.withIndex()) {
+                if (mutableDate == LocalDateTime.parse(trans.date)) {
+                    if (trans.isIncome) temp.income += trans.amount
+                    else temp.expense += trans.amount
+                    sorted.add(trans)
+                    count += i
+                }
+            }
+        }
+
+        notifyDataSetChanged()
+    }
 }
