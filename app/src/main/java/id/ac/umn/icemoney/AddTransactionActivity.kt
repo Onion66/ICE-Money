@@ -97,12 +97,12 @@ class AddTransactionActivity : AppCompatActivity() {
 //                .setAction("Action", null).show()
             transactionViewModel.addTransaction(
                 Transaction(
-                    date = tvInputAddTransactionDate.text.toString(),
+                    date = tvInputAddTransactionDate.text.toString() + " 00:00",
                     amount = tvInputAddTransactionAmount.text.toString().toLong(),
                     isIncome = tvInputAddTransactionType.text.toString().equals("Income", true),
                     category = tvInputAddTransactionCategory.text.toString(),
                     paymentMethod = tvInputAddTransactionPayment.text.toString(),
-                    name = "$tvInputAddTransactionPayment $tvInputAddTransactionCategory $tvInputAddTransactionType",
+                    name = "${tvInputAddTransactionPayment.text} ${tvInputAddTransactionCategory.text} ${tvInputAddTransactionType.text}",
                     id = "${tvInputAddTransactionDate.text.first()}${tvInputAddTransactionAmount.text}${tvInputAddTransactionDate.text.last()}".toLong()
                 )
             )
@@ -188,7 +188,15 @@ class AddTransactionActivity : AppCompatActivity() {
         }
 
         dpInputDate.setOnDateChangedListener { view, year, monthOfYear, dayOfMonth ->
-            tvInputAddTransactionDate.text = "${dayOfMonth}-${monthOfYear}-${year}"
+            var day:String = dayOfMonth.toString()
+            if(day.length == 1){
+                day = "0" + day
+            }
+            var month:String = monthOfYear.toString()
+            if(month.length == 1){
+                month = "0" + month
+            }
+            tvInputAddTransactionDate.text = "${day}-${month}-${year}"
         }
         
         scInputType.setOnItemSelectedListener { scrollChoice, position, name ->

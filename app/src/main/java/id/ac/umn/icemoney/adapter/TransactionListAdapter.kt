@@ -102,23 +102,23 @@ class TransactionListAdapter(
 
         for ((idx, item) in transactionList.withIndex()) {
 //            val str = "1986-04-08 12:30"
-            var tempStr = item.date
-            if(tempStr.length < 16){
-                tempStr += " 00:00"
-            }
+//            var tempStr = item.date
+//            if(tempStr.length < 16){
+//                tempStr += " 00:00"
+//            }
             val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
-            mutableDate = LocalDateTime.parse(tempStr, formatter)
+            mutableDate = LocalDateTime.parse(item.date, formatter)
             Log.d("dateTest", mutableDate.toString())
             sorted.add(idx + count, TransactionSummary(0, 0, mutableDate))
             temp = sorted[idx + count] as TransactionSummary
             count = 0
             for ((i, trans) in transactionList.withIndex()) {
-                var tempTransDate = trans.date
-                if(tempTransDate.length < 16){
-                    tempTransDate += " 00:00"
-                }
+//                var tempTransDate = trans.date
+//                if(tempTransDate.length < 16){
+//                    tempTransDate += " 00:00"
+//                }
 //                Log.d("trans${i}", tempTransDate)
-                if (mutableDate == LocalDateTime.parse(tempTransDate, formatter)) {
+                if (mutableDate == LocalDateTime.parse(trans.date, formatter)) {
                     if (trans.isIncome) temp.income += trans.amount
                     else temp.expense += trans.amount
                     sorted.add(trans)
