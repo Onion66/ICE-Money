@@ -30,7 +30,7 @@ class HomeActivity : AppCompatActivity() {
         // Check Database Connection
         var database = FirebaseDatabase.getInstance().reference
         if (database != null){
-            database.setValue("Test!!!!!!!!!!!!!!!!")
+//            database.setValue("Test!!!!!!!!!!!!!!!!")
             Log.i("database", "test")
         }
 

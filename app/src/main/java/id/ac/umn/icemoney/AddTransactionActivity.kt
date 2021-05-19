@@ -1,16 +1,20 @@
 package id.ac.umn.icemoney
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import id.ac.umn.icemoney.entity.Transaction
 import id.ac.umn.icemoney.view.home.TransactionViewModel
 import kotlinx.android.synthetic.main.activity_add_transaction.*
-import kotlinx.android.synthetic.main.activity_add_transaction.btnBottomSheetClose
-import kotlinx.android.synthetic.main.activity_add_transaction.inputBottomSheet
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.format.DateTimeFormatter
 
 class AddTransactionActivity : AppCompatActivity() {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<FrameLayout>
@@ -19,8 +23,16 @@ class AddTransactionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+
         transactionViewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
         setContentView(R.layout.activity_add_transaction)
+
+        // Set Current Time
+        val currentDate = LocalDateTime.now()
+        val formatTime: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        tvInputAddTransactionDate.text = currentDate.format(formatTime)
+
         initBottomSheet()
 
 //        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager, bottomSheetBehavior)
@@ -40,7 +52,8 @@ class AddTransactionActivity : AppCompatActivity() {
             this.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
-        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+        bottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
 //                when (newState) {
 //                    BottomSheetBehavior.STATE_COLLAPSED -> fabSaveTransaction.visibility = View.VISIBLE
@@ -54,7 +67,10 @@ class AddTransactionActivity : AppCompatActivity() {
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
                 fabSaveTransaction.visibility = View.VISIBLE
-                fabSaveTransaction.animate().scaleX(1 - slideOffset).scaleY(1 - slideOffset).setDuration(0).withEndAction {
+                fabSaveTransaction.animate().scaleX(1 - slideOffset).scaleY(1 - slideOffset)
+                    .setDuration(
+                        0
+                    ).withEndAction {
                     if (slideOffset == 1.0F) {
                         fabSaveTransaction.visibility = View.GONE
                     } else if (slideOffset == 0.0F) {
@@ -93,19 +109,44 @@ class AddTransactionActivity : AppCompatActivity() {
 
     private fun initUICallBack() {
         fabSaveTransaction.setOnClickListener { view ->
-//            Snackbar.make(view, "Successfully Added", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show()
-            transactionViewModel.addTransaction(
-                Transaction(
-                    date = tvInputAddTransactionDate.text.toString() + " 00:00",
-                    amount = tvInputAddTransactionAmount.text.toString().toLong(),
-                    isIncome = tvInputAddTransactionType.text.toString().equals("Income", true),
-                    category = tvInputAddTransactionCategory.text.toString(),
-                    paymentMethod = tvInputAddTransactionPayment.text.toString(),
-                    name = "${tvInputAddTransactionPayment.text} ${tvInputAddTransactionCategory.text} ${tvInputAddTransactionType.text}",
-                    id = "${tvInputAddTransactionDate.text.first()}${tvInputAddTransactionAmount.text}${tvInputAddTransactionDate.text.last()}".toLong()
-                )
+            val trx = Transaction(
+                date = tvInputAddTransactionDate.text.toString() + " 00:00",
+                amount = tvInputAddTransactionAmount.text.toString().toLong(),
+                isIncome = tvInputAddTransactionType.text.toString().equals("Income", true),
+                category = tvInputAddTransactionCategory.text.toString(),
+                paymentMethod = tvInputAddTransactionPayment.text.toString(),
+                name = tvInputAddTransactionName.text.toString(),
+                id = "${tvInputAddTransactionDate.text.first()}${tvInputAddTransactionAmount.text}${tvInputAddTransactionDate.text.last()}".toLong()
             )
+
+            Log.i("trx", trx.toString())
+
+            // Save to DAO (Local)
+            transactionViewModel.addTransaction(trx)
+
+            // Save to Firebase (Cloud)
+            val id = FirebaseAuth.getInstance().currentUser.uid
+            val database = FirebaseDatabase.getInstance().reference
+            val idFirebase = database.push().key
+            // Path di Realtime Firebase = idUser > idUnik
+            database.child(id).child(idFirebase!!).setValue(trx).addOnSuccessListener {
+                // Reset Form Field
+//                tvInputAddTransactionDate.text.clear()
+//                tvInputAddTransactionAmount.text.clear()
+//                tvInputAddTransactionType.text.clear()
+//                tvInputAddTransactionCategory.text.clear()
+//                tvInputAddTransactionPayment.text.clear()
+//                tvInputAddTransactionName.text.clear()
+
+                // Snackbar notification
+                Snackbar.make(view, "Successfully Added", Snackbar.LENGTH_SHORT)
+                    .setAction("Action", null).show()
+            }.addOnFailureListener{
+                // Snackbar notification
+                Snackbar.make(view, "Failed to add into cloud", Snackbar.LENGTH_SHORT)
+                    .setAction("Action", null).show()
+            }
+
             finish()
         }
 
@@ -123,7 +164,18 @@ class AddTransactionActivity : AppCompatActivity() {
         }
 
         tvInputAddTransactionCategory.setOnClickListener {
-            scInputCategory.addItems(listOf("Drink", "Food", "Snack", "Tuition", "Education", "Admission", "Health", "Saving"), 0)
+            scInputCategory.addItems(
+                listOf(
+                    "Drink",
+                    "Food",
+                    "Snack",
+                    "Tuition",
+                    "Education",
+                    "Admission",
+                    "Health",
+                    "Saving"
+                ), 0
+            )
             scInputCategory.visibility = View.VISIBLE
             tvInputAddTransactionType.isEnabled = false
             tvInputAddTransactionPayment.isEnabled = false
@@ -253,7 +305,10 @@ class AddTransactionActivity : AppCompatActivity() {
         }
 
         btnInputBackSpace.setOnClickListener {
-            tvInputAddTransactionAmount.text = tvInputAddTransactionAmount.text.replaceFirst(".$".toRegex(),"")
+            tvInputAddTransactionAmount.text = tvInputAddTransactionAmount.text.replaceFirst(
+                ".$".toRegex(),
+                ""
+            )
         }
     }
 }
