@@ -5,10 +5,11 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/llTransactionSum"
         style="@style/mw"
         android:orientation="horizontal"
         android:padding="@dimen/padding_xs"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rvSubItems"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -49,8 +50,8 @@
             android:id="@+id/tvTransactionIncome"
             style="@style/textMedium"
             android:layout_width="@dimen/no_padding"
-            android:layout_weight="0.5"
             android:layout_height="match_parent"
+            android:layout_weight="0.5"
             android:gravity="right|center"
             android:text="Rp. 1,500,000"
             android:textColor="@color/blue" />
@@ -59,12 +60,21 @@
             android:id="@+id/tvTransactionExpense"
             style="@style/textMedium"
             android:layout_width="@dimen/no_padding"
-            android:layout_weight="0.5"
             android:layout_height="match_parent"
+            android:layout_weight="0.5"
             android:gravity="right|center"
             android:text="Rp. 500,000"
             android:textColor="@color/red" />
 
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSubItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llTransactionSum" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -100,6 +100,7 @@ class TransactionListAdapter(
         var mutableDate: LocalDateTime
         var count = 0
         var temp: TransactionSummary
+        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
 
         for ((idx, item) in transactionList.withIndex()) {
 //            val str = "1986-04-08 12:30"
@@ -107,7 +108,7 @@ class TransactionListAdapter(
 //            if(tempStr.length < 16){
 //                tempStr += " 00:00"
 //            }
-            val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
+
             mutableDate = LocalDateTime.parse(item.date, formatter)
             Log.d("dateTest", mutableDate.toString())
             sorted.add(idx + count, TransactionSummary(0, 0, mutableDate))

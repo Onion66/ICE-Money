@@ -13,11 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.jakewharton.threetenabp.AndroidThreeTen
 import id.ac.umn.icemoney.AddTransactionActivity
 import id.ac.umn.icemoney.R
-import id.ac.umn.icemoney.adapter.TransactionListAdapter
+import id.ac.umn.icemoney.adapter.TransactionMainAdapter
 import id.ac.umn.icemoney.entity.Transaction
-import id.ac.umn.icemoney.model.TransactionSummary
 import kotlinx.android.synthetic.main.fragment_home.*
-import org.threeten.bp.LocalDateTime
 
 class HomeFragment : Fragment() {
     private lateinit var transactionList: List<Transaction>
@@ -39,14 +37,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUICallBack()
-        val adapter = TransactionListAdapter()
+        val adapter = TransactionMainAdapter()
         rvTransactionList.adapter = adapter
         rvTransactionList.layoutManager = LinearLayoutManager(requireContext())
 
         transactionViewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
         transactionViewModel.transactionList.observe(viewLifecycleOwner, Observer {
-            adapter.setData(it)
+            adapter.setDataList(it)
         })
+
         AndroidThreeTen.init(context)
 //        if(context != null) {
 //            Log.i("testDate",LocalDateTime.of(1990, 12, 31, 23, 59, 59).toString())
@@ -124,18 +123,18 @@ class HomeFragment : Fragment() {
 //
 //            }
 //        }
-        configureViewModel()
+//        configureViewModel()
     }
 
-    private fun configureViewModel() {
-        val adapter = TransactionListAdapter()
-        rvTransactionList.adapter = adapter
-        rvTransactionList.layoutManager = LinearLayoutManager(requireContext())
-
-        transactionViewModel.transactionList.observe(viewLifecycleOwner, Observer {
-            adapter.setData(it)
-        })
-    }
+//    private fun configureViewModel() {
+//        val adapter = TransactionMainAdapter()
+//        rvTransactionList.adapter = adapter
+//        rvTransactionList.layoutManager = LinearLayoutManager(requireContext())
+//
+//        transactionViewModel.transactionList.observe(viewLifecycleOwner, Observer {
+//            adapter.setDataList(it)
+//        })
+//    }
 
     private fun initUICallBack() {
         fabAddTransaction.setOnClickListener {
