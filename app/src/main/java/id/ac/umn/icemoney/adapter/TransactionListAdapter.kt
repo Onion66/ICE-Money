@@ -1,6 +1,7 @@
 package id.ac.umn.icemoney.adapter
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,7 @@ import id.ac.umn.icemoney.model.TransactionSummary
 import kotlinx.android.synthetic.main.item_expense_date_amount.view.*
 import kotlinx.android.synthetic.main.item_expense_detail.view.*
 import org.threeten.bp.LocalDateTime
-import java.lang.IllegalArgumentException
+import org.threeten.bp.format.DateTimeFormatter
 
 class TransactionListAdapter(
 //    private val transactions: List<Any>
@@ -100,12 +101,24 @@ class TransactionListAdapter(
         var temp: TransactionSummary
 
         for ((idx, item) in transactionList.withIndex()) {
-            mutableDate = LocalDateTime.parse(item.date)
+//            val str = "1986-04-08 12:30"
+            var tempStr = item.date
+            if(tempStr.length < 16){
+                tempStr += " 00:00"
+            }
+            val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
+            mutableDate = LocalDateTime.parse(tempStr, formatter)
+            Log.d("dateTest", mutableDate.toString())
             sorted.add(idx + count, TransactionSummary(0, 0, mutableDate))
             temp = sorted[idx + count] as TransactionSummary
             count = 0
             for ((i, trans) in transactionList.withIndex()) {
-                if (mutableDate == LocalDateTime.parse(trans.date)) {
+                var tempTransDate = trans.date
+                if(tempTransDate.length < 16){
+                    tempTransDate += " 00:00"
+                }
+//                Log.d("trans${i}", tempTransDate)
+                if (mutableDate == LocalDateTime.parse(tempTransDate, formatter)) {
                     if (trans.isIncome) temp.income += trans.amount
                     else temp.expense += trans.amount
                     sorted.add(trans)

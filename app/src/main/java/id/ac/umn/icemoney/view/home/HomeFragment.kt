@@ -30,14 +30,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val adapter = TransactionListAdapter()
-        rvTransactionList.adapter = adapter
-        rvTransactionList.layoutManager = LinearLayoutManager(requireContext())
 
-        transactionViewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
-        transactionViewModel.transactionList.observe(viewLifecycleOwner, Observer {
-            adapter.setData(it)
-        })
 //        homeViewModel =
 //            ViewModelProvider(this).get(HomeViewModel::class.java)
         return inflater.inflate(R.layout.fragment_home, container, false)
@@ -46,6 +39,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUICallBack()
+        val adapter = TransactionListAdapter()
+        rvTransactionList.adapter = adapter
+        rvTransactionList.layoutManager = LinearLayoutManager(requireContext())
+
+        transactionViewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
+        transactionViewModel.transactionList.observe(viewLifecycleOwner, Observer {
+            adapter.setData(it)
+        })
         AndroidThreeTen.init(context)
 //        if(context != null) {
 //            Log.i("testDate",LocalDateTime.of(1990, 12, 31, 23, 59, 59).toString())
