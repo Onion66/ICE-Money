@@ -30,7 +30,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        transactionViewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
 //        homeViewModel =
 //            ViewModelProvider(this).get(HomeViewModel::class.java)
         return inflater.inflate(R.layout.fragment_home, container, false)
@@ -124,6 +124,17 @@ class HomeFragment : Fragment() {
 //
 //            }
 //        }
+        configureViewModel()
+    }
+
+    private fun configureViewModel() {
+        val adapter = TransactionListAdapter()
+        rvTransactionList.adapter = adapter
+        rvTransactionList.layoutManager = LinearLayoutManager(requireContext())
+
+        transactionViewModel.transactionList.observe(viewLifecycleOwner, Observer {
+            adapter.setData(it)
+        })
     }
 
     private fun initUICallBack() {

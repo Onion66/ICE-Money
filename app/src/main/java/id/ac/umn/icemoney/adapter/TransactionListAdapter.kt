@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.item_expense_date_amount.view.*
 import kotlinx.android.synthetic.main.item_expense_detail.view.*
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
+import java.lang.IllegalArgumentException
 
 class TransactionListAdapter(
 //    private val transactions: List<Any>
