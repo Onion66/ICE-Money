@@ -48,11 +48,11 @@ class TransactionMainAdapter : RecyclerView.Adapter<ViewHolder>() {
         holder.data.adapter = adapter
         holder.data.layoutManager = LinearLayoutManager(holder.itemView.rvSubItems.context,
         RecyclerView.VERTICAL, false)
+        adapter.setDataList(data[position].data)
     }
 
     fun setDataList(list : List<Transaction>) {
         data = TransactionUtils.groupTransactionByDate(list)
-        adapter.setDataList(list)
         notifyDataSetChanged()
     }
 }

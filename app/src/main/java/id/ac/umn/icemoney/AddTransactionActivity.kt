@@ -15,6 +15,7 @@ import id.ac.umn.icemoney.view.home.TransactionViewModel
 import kotlinx.android.synthetic.main.activity_add_transaction.*
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
+import java.util.*
 
 class AddTransactionActivity : AppCompatActivity() {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<FrameLayout>
@@ -116,7 +117,7 @@ class AddTransactionActivity : AppCompatActivity() {
                 category = tvInputAddTransactionCategory.text.toString(),
                 paymentMethod = tvInputAddTransactionPayment.text.toString(),
                 name = tvInputAddTransactionName.text.toString(),
-                id = "${tvInputAddTransactionDate.text.first()}${tvInputAddTransactionAmount.text}${tvInputAddTransactionDate.text.last()}".toLong()
+                id = UUID.randomUUID().toString()
             )
 
             Log.i("trx", trx.toString())

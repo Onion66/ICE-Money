@@ -2,30 +2,33 @@ package id.ac.umn.icemoney.utils
 
 import id.ac.umn.icemoney.entity.Transaction
 import id.ac.umn.icemoney.model.TransactionSummary
+import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
 
 object TransactionUtils {
-    val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
+    val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+    val timeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 
     fun groupTransactionByDate(list : List<Transaction>) : List<TransactionSummary> {
-        val groupByTime = list.groupBy { it.date }
+        val groupByTime = list.groupBy { it.date.take(10) }
         val transaction = mutableListOf<TransactionSummary>()
-        var temp = TransactionSummary()
+        var expense: Long
+        var income: Long
 
         groupByTime.mapValues { (date, data) ->
-            temp.expense = 0
-            temp.income = 0
-            temp.data = listOf()
-            temp = TransactionSummary(
-                date = LocalDateTime.parse(date, formatter),
-                data = data
-            )
+            expense = 0
+            income = 0
             data.forEach {
-                if (it.isIncome) temp.income += it.amount
-                else temp.expense += it.amount
+                if (it.isIncome) income += it.amount
+                else expense += it.amount
             }
-            transaction.add(temp)
+            transaction.add(TransactionSummary(
+                income,
+                expense,
+                LocalDate.parse(date, dateFormatter),
+                data
+            ))
         }
         return transaction
     }
