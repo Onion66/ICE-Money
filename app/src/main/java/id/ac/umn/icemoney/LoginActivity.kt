@@ -55,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             loginUser(email, password)
-            sendNotification()
+
         }
 
         tvRegister.setOnClickListener{
@@ -69,6 +69,7 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if(it.isSuccessful){
+                    sendNotification()
                     Toast.makeText(this, "Berhasil Login", Toast.LENGTH_SHORT).show()
                     Intent(this@LoginActivity, HomeActivity::class.java).also { intent->
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
