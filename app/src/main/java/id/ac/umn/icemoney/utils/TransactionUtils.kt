@@ -1,6 +1,7 @@
 package id.ac.umn.icemoney.utils
 
 import id.ac.umn.icemoney.entity.Transaction
+import id.ac.umn.icemoney.model.TransactionChart
 import id.ac.umn.icemoney.model.TransactionSummary
 import id.ac.umn.icemoney.model.TransactionTotal
 import org.threeten.bp.LocalDate
@@ -8,6 +9,7 @@ import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
 
 object TransactionUtils {
+    val dateFormatterFull: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
     val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
     val timeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 
@@ -32,6 +34,18 @@ object TransactionUtils {
             ))
         }
         return transaction
+    }
+
+    fun getExpenseByMonth(list: List<Transaction>, month: String): List<TransactionChart>{
+        val groupByMonth = list.groupBy { it.date.take(5).takeLast(2) }
+        val listExpense = mutableListOf<TransactionChart>()
+
+        groupByMonth.mapValues { (date, data) ->
+            data.forEach {
+                if(!it.isIncome && date.take(5).takeLast(2) == month) listExpense.add(TransactionChart(it.name, it.amount))
+            }
+        }
+        return listExpense
     }
 
     fun getTotalExpense(list : List<Transaction>) : TransactionTotal {
