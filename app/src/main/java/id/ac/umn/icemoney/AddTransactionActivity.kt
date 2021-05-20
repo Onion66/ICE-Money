@@ -130,23 +130,14 @@ class AddTransactionActivity : AppCompatActivity() {
             val idFirebase = database.push().key
             // Path di Realtime Firebase = idUser > idUnik
             database.child(id).child(idFirebase!!).setValue(trx).addOnSuccessListener {
-                // Reset Form Field
-//                tvInputAddTransactionDate.text.clear()
-//                tvInputAddTransactionAmount.text.clear()
-//                tvInputAddTransactionType.text.clear()
-//                tvInputAddTransactionCategory.text.clear()
-//                tvInputAddTransactionPayment.text.clear()
-//                tvInputAddTransactionName.text.clear()
-
                 // Snackbar notification
-                Snackbar.make(view, "Successfully Added", Snackbar.LENGTH_SHORT)
+                Snackbar.make(view, "Sukses menambahkan transaksi", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show()
             }.addOnFailureListener{
                 // Snackbar notification
-                Snackbar.make(view, "Failed to add into cloud", Snackbar.LENGTH_SHORT)
+                Snackbar.make(view, "Gagal menyimpan transaksi ke internet", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show()
             }
-
             finish()
         }
 
@@ -156,7 +147,7 @@ class AddTransactionActivity : AppCompatActivity() {
             tvInputAddTransactionPayment.isEnabled = false
             tvInputAddTransactionCategory.isEnabled = false
             tvInputAddTransactionDate.isEnabled = false
-            tvBottomSheetLabelInput.text = "Amount"
+            tvBottomSheetLabelInput.text = "Jumlah"
             if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             else
@@ -166,14 +157,13 @@ class AddTransactionActivity : AppCompatActivity() {
         tvInputAddTransactionCategory.setOnClickListener {
             scInputCategory.addItems(
                 listOf(
-                    "Drink",
-                    "Food",
-                    "Snack",
-                    "Tuition",
-                    "Education",
-                    "Admission",
-                    "Health",
-                    "Saving"
+                    "Makanan",
+                    "Minuman",
+                    "Transportasi",
+                    "Kesehatan",
+                    "Pendidikan",
+                    "Hiburan",
+                    "Lain-lain"
                 ), 0
             )
             scInputCategory.visibility = View.VISIBLE
@@ -194,7 +184,7 @@ class AddTransactionActivity : AppCompatActivity() {
             tvInputAddTransactionPayment.isEnabled = false
             tvInputAddTransactionAmount.isEnabled = false
             tvInputAddTransactionCategory.isEnabled = false
-            tvBottomSheetLabelInput.text = "Date"
+            tvBottomSheetLabelInput.text = "Tanggal"
             if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             else
@@ -202,13 +192,13 @@ class AddTransactionActivity : AppCompatActivity() {
         }
 
         tvInputAddTransactionPayment.setOnClickListener {
-            scInputPayment.addItems(listOf("GoPay", "Cash", "OVO", "Credit Card", "Apple Pay"), 0)
+            scInputPayment.addItems(listOf("Cash", "OVO", "GoPay", "Dana","Kartu Kredit"), 0)
             scInputPayment.visibility = View.VISIBLE
             tvInputAddTransactionType.isEnabled = false
             tvInputAddTransactionCategory.isEnabled = false
             tvInputAddTransactionAmount.isEnabled = false
             tvInputAddTransactionDate.isEnabled = false
-            tvBottomSheetLabelInput.text = "Payment"
+            tvBottomSheetLabelInput.text = "Pembayaran"
             if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             else
@@ -216,7 +206,7 @@ class AddTransactionActivity : AppCompatActivity() {
         }
 
         tvInputAddTransactionType.setOnClickListener {
-            scInputType.addItems(listOf("Expense", "Income"), 0)
+            scInputType.addItems(listOf("Pengeluaran", "Pemasukan"), 0)
             scInputType.visibility = View.VISIBLE
             tvInputAddTransactionPayment.isEnabled = false
             tvInputAddTransactionCategory.isEnabled = false
