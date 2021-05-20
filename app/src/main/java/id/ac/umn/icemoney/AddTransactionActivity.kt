@@ -244,7 +244,8 @@ class AddTransactionActivity : AppCompatActivity() {
             if(day.length == 1){
                 day = "0" + day
             }
-            var month:String = monthOfYear.toString()
+            var tempMonth = monthOfYear + 1
+            var month:String = tempMonth.toString()
             if(month.length == 1){
                 month = "0" + month
             }
