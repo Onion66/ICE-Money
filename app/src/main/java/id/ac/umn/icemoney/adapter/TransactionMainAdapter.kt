@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.item_expense_date_amount.view.*
 
 class TransactionMainAdapter : RecyclerView.Adapter<ViewHolder>() {
     var data : List<TransactionSummary> = listOf()
-    val adapter : TransactionSubAdapter = TransactionSubAdapter()
+//    val adapter : TransactionSubAdapter = TransactionSubAdapter()
     val viewPool = RecyclerView.RecycledViewPool()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -23,7 +23,7 @@ class TransactionMainAdapter : RecyclerView.Adapter<ViewHolder>() {
         val day = view.tvTransactionDay
         val income = view.tvTransactionIncome
         val expense = view.tvTransactionExpense
-        val data = view.rvSubItems
+//        val data = view.rvSubItems
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -44,13 +44,19 @@ class TransactionMainAdapter : RecyclerView.Adapter<ViewHolder>() {
         else holder.income.visibility = View.VISIBLE
         if (data[position].expense == 0L) holder.expense.visibility = View.GONE
         else holder.expense.visibility = View.VISIBLE
-        // holder.itemView.tag = position
-        // holder.itemView.setOnClickListener {  }
-        holder.data.adapter = adapter
-        holder.data.setRecycledViewPool(viewPool)
-        holder.data.layoutManager = LinearLayoutManager(holder.itemView.rvSubItems.context,
-        RecyclerView.VERTICAL, false)
-        adapter.setDataList(data[position].data)
+        holder.itemView.tag = position
+        holder.itemView.setOnClickListener {  }
+//        holder.itemView.rvSubItems.adapter = adapter
+//        holder.itemView.rvSubItems.setRecycledViewPool(viewPool)
+        val childLayoutManager = LinearLayoutManager(holder.itemView.rvSubItems.context,
+            RecyclerView.VERTICAL, false)
+//        holder.itemView.rvSubItems.layoutManager = childLayoutManager
+        holder.itemView.rvSubItems.apply {
+            layoutManager = childLayoutManager
+            adapter = TransactionSubAdapter(data[position])
+            setRecycledViewPool(viewPool)
+        }
+//        adapter.setDataList(data[position].data)
     }
 
     fun setDataList(list : List<Transaction>) {
