@@ -113,7 +113,7 @@ class AddTransactionActivity : AppCompatActivity() {
             val trx = Transaction(
                 date = tvInputAddTransactionDate.text.toString() + " 00:00",
                 amount = tvInputAddTransactionAmount.text.toString().toLong(),
-                isIncome = tvInputAddTransactionType.text.toString().equals("Income", true),
+                isIncome = tvInputAddTransactionType.text.toString().equals("Pemasukan", true),
                 category = tvInputAddTransactionCategory.text.toString(),
                 paymentMethod = tvInputAddTransactionPayment.text.toString(),
                 name = tvInputAddTransactionName.text.toString(),

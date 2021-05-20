@@ -15,6 +15,7 @@ import id.ac.umn.icemoney.AddTransactionActivity
 import id.ac.umn.icemoney.R
 import id.ac.umn.icemoney.adapter.TransactionMainAdapter
 import id.ac.umn.icemoney.entity.Transaction
+import id.ac.umn.icemoney.utils.TransactionUtils
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
@@ -44,6 +45,10 @@ class HomeFragment : Fragment() {
         transactionViewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
         transactionViewModel.transactionList.observe(viewLifecycleOwner, Observer {
             adapter.setDataList(it)
+            val transaction = TransactionUtils.getTotalExpense(it)
+            tvTransactionTotalExpense.text = transaction.expense.toString()
+            tvTransactionTotalIncome.text = transaction.income.toString()
+            tvTransactionTotal.text = transaction.total.toString()
         })
 
         AndroidThreeTen.init(context)

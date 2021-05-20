@@ -2,6 +2,7 @@ package id.ac.umn.icemoney.utils
 
 import id.ac.umn.icemoney.entity.Transaction
 import id.ac.umn.icemoney.model.TransactionSummary
+import id.ac.umn.icemoney.model.TransactionTotal
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
@@ -31,5 +32,19 @@ object TransactionUtils {
             ))
         }
         return transaction
+    }
+
+    fun getTotalExpense(list : List<Transaction>) : TransactionTotal {
+        var expense : Long = 0
+        var income : Long = 0
+        list.forEach {
+            if (it.isIncome) income += it.amount
+            else expense += it.amount
+        }
+        return TransactionTotal(
+            expense,
+            income,
+            (income - expense)
+        )
     }
 }
