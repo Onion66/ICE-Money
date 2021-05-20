@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.item_expense_date_amount.view.*
 class TransactionMainAdapter : RecyclerView.Adapter<ViewHolder>() {
     var data : List<TransactionSummary> = listOf()
     val adapter : TransactionSubAdapter = TransactionSubAdapter()
+    val viewPool = RecyclerView.RecycledViewPool()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val date = view.tvTransactionDate
@@ -46,6 +47,7 @@ class TransactionMainAdapter : RecyclerView.Adapter<ViewHolder>() {
         // holder.itemView.tag = position
         // holder.itemView.setOnClickListener {  }
         holder.data.adapter = adapter
+        holder.data.setRecycledViewPool(viewPool)
         holder.data.layoutManager = LinearLayoutManager(holder.itemView.rvSubItems.context,
         RecyclerView.VERTICAL, false)
         adapter.setDataList(data[position].data)

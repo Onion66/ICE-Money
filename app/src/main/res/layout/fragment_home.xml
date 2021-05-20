@@ -107,11 +107,16 @@
             android:layout_height="1dp"
             android:background="@android:color/darker_gray"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvTransactionList"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTransactionList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </ScrollView>
 
         <LinearLayout
             android:id="@+id/noData"
