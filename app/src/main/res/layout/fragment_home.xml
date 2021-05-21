@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
                     android:textColor="@color/blue"
-                    android:text="Rp 1000" />
+                    android:text="Rp     " />
 
             </LinearLayout>
 
@@ -69,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
                     android:textColor="@color/red"
-                    android:text="Rp 500" />
+                    android:text="Rp     " />
 
             </LinearLayout>
 

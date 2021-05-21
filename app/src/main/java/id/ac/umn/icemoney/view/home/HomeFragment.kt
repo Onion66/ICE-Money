@@ -179,8 +179,8 @@ class HomeFragment : Fragment() {
         }
         builder.setNegativeButton("No"){_,_ ->
         }
-        builder.setTitle("Delete everything")
-        builder.setMessage("are you sure?")
+        builder.setTitle("Hapus data lokal")
+        builder.setMessage("Apakah Anda yakin?")
         builder.create().show()
     }
 }
