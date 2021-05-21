@@ -1,7 +1,12 @@
 package id.ac.umn.icemoney.view.setting
 
+import android.Manifest
+import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +14,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,15 +26,18 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import com.tbruyelle.rxpermissions2.RxPermissions
 import id.ac.umn.icemoney.AboutUsActivity
 import id.ac.umn.icemoney.LoginActivity
+import id.ac.umn.icemoney.MainActivity
 import id.ac.umn.icemoney.R
 import id.ac.umn.icemoney.entity.Transaction
 import id.ac.umn.icemoney.view.home.TransactionViewModel
 
 
 class SettingFragment : Fragment() {
+    val REQUEST_IMAGE_CAPTURE = 1
+    val REQUEST_VIDEO_CAPTURE = 2
+
     private lateinit var transactionViewModel: TransactionViewModel
 
     override fun onCreateView(
@@ -61,20 +71,27 @@ class SettingFragment : Fragment() {
         val idFirebase = database.push().key
         val gantiGambarButton: Button = root.findViewById(R.id.gantiGambar)
         gantiGambarButton.setOnClickListener { view ->
+            Intent(MediaStore.ACTION_IMAGE_CAPTURE).also {
+                if(checkCameraPermission() == true){
+                    if(it.resolveActivity(requireActivity().packageManager) != null){
+                        startActivityForResult(it, REQUEST_IMAGE_CAPTURE)
+                    }
+                }
+            }
 
             // TODO: Simpan data ke IMGUR dan return URL
-            val urlImage = "test"
-
-            // Simpan ke firebase
-            database.child("gambarProfile").child(id).child(idFirebase!!).setValue(urlImage).addOnSuccessListener {
-                // Snackbar notification
-                Snackbar.make(view, "Sukses menyimpan gambar", Snackbar.LENGTH_SHORT)
-                    .setAction("Action", null).show()
-            }.addOnFailureListener{
-                // Snackbar notification
-                Snackbar.make(view, "Gagal menyimpan gambar ke internet", Snackbar.LENGTH_SHORT)
-                    .setAction("Action", null).show()
-            }
+//            val urlImage = "test"
+//
+//            // Simpan ke firebase
+//            database.child("gambarProfile").child(id).child(idFirebase!!).setValue(urlImage).addOnSuccessListener {
+//                // Snackbar notification
+//                Snackbar.make(view, "Sukses menyimpan gambar", Snackbar.LENGTH_SHORT)
+//                    .setAction("Action", null).show()
+//            }.addOnFailureListener{
+//                // Snackbar notification
+//                Snackbar.make(view, "Gagal menyimpan gambar ke internet", Snackbar.LENGTH_SHORT)
+//                    .setAction("Action", null).show()
+//            }
         }
 
 
@@ -170,6 +187,26 @@ class SettingFragment : Fragment() {
         }
 
         return root
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    fun checkCameraPermission(): Boolean? {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_DENIED
+        ) {
+            requestPermissions(arrayOf(Manifest.permission.CAMERA), 100)
+        }
+        return true
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK){
+            Snackbar.make(requireView(), "Sukses menyimpan gambar", Snackbar.LENGTH_SHORT)
+                .setAction("Action", null).show()
+        }
     }
 
 }
