@@ -1,6 +1,7 @@
 package id.ac.umn.icemoney.view.home
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import id.ac.umn.icemoney.adapter.TransactionMainAdapter
 import id.ac.umn.icemoney.entity.Transaction
 import id.ac.umn.icemoney.utils.TransactionUtils
 import kotlinx.android.synthetic.main.fragment_home.*
+import java.lang.Math.abs
 
 class HomeFragment : Fragment() {
     private lateinit var transactionList: List<Transaction>
@@ -48,7 +50,9 @@ class HomeFragment : Fragment() {
             val transaction = TransactionUtils.getTotalExpense(it)
             tvTransactionTotalExpense.text = "Rp. ${transaction.expense}"
             tvTransactionTotalIncome.text = "Rp. ${transaction.income}"
-            tvTransactionTotal.text = "Rp. ${transaction.total}"
+            if (transaction.total < 0) tvTransactionTotal.setTextColor(Color.parseColor("#E74C3C"))
+            else tvTransactionTotal.setTextColor(Color.parseColor("#3498DB"))
+            tvTransactionTotal.text = "Rp. ${abs(transaction.total)}"
         })
 
         AndroidThreeTen.init(context)
