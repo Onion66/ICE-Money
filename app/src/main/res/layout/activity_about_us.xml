@@ -19,118 +19,264 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/gridLayout"
+        android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:background="@drawable/layout_border"
+        android:padding="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <ImageView
-            android:id="@+id/image_daniel"
+            android:id="@+id/image_1"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@mipmap/ic_launcher" />
 
-        <TextView
-            android:id="@+id/desc_daniel"
-            android:layout_width="wrap_content"
+        <View
+            android:id="@+id/view"
+            android:layout_width="10dp"
             android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/desc_1_nama"
+            android:layout_width="282dp"
+            android:layout_height="30dp"
             android:text="Lorem ipsum dolor sit amet"
-            android:textAlignment="center"
+            android:textAlignment="textStart"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.132"
-            app:layout_constraintStart_toEndOf="@+id/image_daniel"
-            tools:layout_editor_absoluteY="0dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gridLayout">
-
-        <ImageView
-            android:id="@+id/image_jojo"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/view"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/desc_jojo"
+            android:id="@+id/desc_1_nim"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="TextView"
-            android:textAlignment="center"
-            android:textSize="20dp"
+            android:layout_height="30dp"
+            android:text="Lorem nim eheheheh"
+            android:textAlignment="textStart"
+            android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.035"
-            app:layout_constraintStart_toEndOf="@+id/image_jojo"
-            tools:layout_editor_absoluteY="0dp" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/view"
+            app:layout_constraintTop_toBottomOf="@+id/desc_1_nama" />
+
+        <TextView
+            android:id="@+id/desc_1_email"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Lorem email eheheheh"
+            android:textAlignment="textStart"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/view"
+            app:layout_constraintTop_toBottomOf="@+id/desc_1_nim" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout3"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/layout_border"
+        android:padding="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
         <ImageView
-            android:id="@+id/image_darren"
+            android:id="@+id/image_2"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@mipmap/ic_launcher" />
 
-        <TextView
-            android:id="@+id/desc_darren"
-            android:layout_width="wrap_content"
+        <View
+            android:id="@+id/view2"
+            android:layout_width="10dp"
             android:layout_height="match_parent"
-            android:text="TextView"
-            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/desc_2_nama"
+            android:layout_width="282dp"
+            android:layout_height="30dp"
+            android:text="Lorem ipsum dolor sit amet"
+            android:textAlignment="textStart"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.035"
-            app:layout_constraintStart_toEndOf="@+id/image_darren"
-            tools:layout_editor_absoluteY="0dp" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/view2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/desc_2_nim"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Lorem nim eheheheh"
+            android:textAlignment="textStart"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/view2"
+            app:layout_constraintTop_toBottomOf="@+id/desc_2_nama" />
+
+        <TextView
+            android:id="@+id/desc_2_email"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Lorem email eheheheh"
+            android:textAlignment="textStart"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/view2"
+            app:layout_constraintTop_toBottomOf="@+id/desc_2_nim" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/layout_border"
+        android:padding="4dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+        <ImageView
+            android:id="@+id/image_3"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/desc_3_nama"
+            android:layout_width="282dp"
+            android:layout_height="30dp"
+            android:text="Lorem ipsum dolor sit amet"
+            android:textAlignment="textStart"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/view3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/desc_3_nim"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Lorem nim eheheheh"
+            android:textAlignment="textStart"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/view3"
+            app:layout_constraintTop_toBottomOf="@+id/desc_3_nama" />
+
+        <TextView
+            android:id="@+id/desc_3_email"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Lorem email eheheheh"
+            android:textAlignment="textStart"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/view3"
+            app:layout_constraintTop_toBottomOf="@+id/desc_3_nim" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:background="@drawable/layout_border"
+        android:padding="4dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
         <ImageView
-            android:id="@+id/image_chendra"
+            android:id="@+id/image_4"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@mipmap/ic_launcher" />
 
-        <TextView
-            android:id="@+id/desc_chendra"
-            android:layout_width="wrap_content"
+        <View
+            android:id="@+id/view4"
+            android:layout_width="10dp"
             android:layout_height="match_parent"
-            android:text="TextView"
-            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_4"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/desc_4_nama"
+            android:layout_width="282dp"
+            android:layout_height="30dp"
+            android:text="Lorem ipsum dolor sit amet"
+            android:textAlignment="textStart"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.035"
-            app:layout_constraintStart_toEndOf="@+id/image_chendra"
-            tools:layout_editor_absoluteY="0dp" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/view4"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/desc_4_nim"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Lorem nim eheheheh"
+            android:textAlignment="textStart"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/view4"
+            app:layout_constraintTop_toBottomOf="@+id/desc_4_nama" />
+
+        <TextView
+            android:id="@+id/desc_4_email"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:gravity="center"
+            android:text="Lorem email eheheheh"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/view4"
+            app:layout_constraintTop_toBottomOf="@+id/desc_4_nim"
+            app:layout_constraintVertical_bias="0.0" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

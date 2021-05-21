@@ -1,16 +1,25 @@
 package id.ac.umn.icemoney
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import id.ac.umn.icemoney.entity.Transaction
+import id.ac.umn.icemoney.utils.TransactionUtils
+import id.ac.umn.icemoney.view.dashboard.DashboardFragment
 import id.ac.umn.icemoney.view.home.TransactionViewModel
 import kotlinx.android.synthetic.main.activity_add_transaction.*
 import org.threeten.bp.LocalDateTime
@@ -24,7 +33,6 @@ class AddTransactionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        transactionViewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
         setContentView(R.layout.activity_add_transaction)
 
         // Set Current Time
@@ -125,7 +133,7 @@ class AddTransactionActivity : AppCompatActivity() {
             val database = FirebaseDatabase.getInstance().reference
             val idFirebase = database.push().key
             // Path di Realtime Firebase = idUser > idUnik
-            database.child(id).child(idFirebase!!).setValue(trx).addOnSuccessListener {
+            database.child("transaksi").child(id).child(idFirebase!!).setValue(trx).addOnSuccessListener {
                 // Snackbar notification
                 Snackbar.make(view, "Sukses menambahkan transaksi", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show()
@@ -153,15 +161,7 @@ class AddTransactionActivity : AppCompatActivity() {
 
         tvInputAddTransactionCategory.setOnClickListener {
             scInputCategory.addItems(
-                listOf(
-                    "Makanan",
-                    "Minuman",
-                    "Transportasi",
-                    "Kesehatan",
-                    "Pendidikan",
-                    "Hiburan",
-                    "Lain-lain"
-                ), 0
+                TransactionUtils.listKategori,0
             )
             scInputCategory.visibility = View.VISIBLE
             tvInputAddTransactionType.isEnabled = false
@@ -250,6 +250,8 @@ class AddTransactionActivity : AppCompatActivity() {
         scInputCategory.setOnItemSelectedListener { scrollChoice, position, name ->
             tvInputAddTransactionCategory.text = name.toString()
         }
+
+
 
         // Keyboard
         btnInputOne.setOnClickListener {

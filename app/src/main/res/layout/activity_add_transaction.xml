@@ -191,6 +191,8 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_small"
                 android:background="@null"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:hint="Susu" />
 
         </LinearLayout>

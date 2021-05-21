@@ -49,10 +49,7 @@ dependencies {
 
     // Firebase Dependencies
     implementation 'com.google.firebase:firebase-auth:20.0.4'
-//    implementation platform('com.google.firebase:firebase-bom:27.1.0')
-//    implementation 'com.google.firebase:firebase-database-ktx'
-//    implementation 'com.google.firebase:firebase-analytics-ktx'
-//    implementation 'com.google.firebase:firebase-database:19.7.0'
+    implementation 'com.google.firebase:firebase-database:19.7.0'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.navigation:navigation-fragment:2.3.4'
@@ -61,7 +58,6 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.4'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.4'
-    implementation 'com.google.firebase:firebase-database:19.7.0'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
 
     // Room Dependencies
@@ -76,8 +72,23 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    // Custom Dependencies
+    // Chart
     implementation 'com.github.AAChartModel:AAChartCore-Kotlin:-SNAPSHOT'
+
+    // Time Manipulation
     implementation 'com.jakewharton.threetenabp:threetenabp:1.3.1'
+
+    // Scroll
     implementation 'com.webianks.library:scroll-choice:1.0.1'
+
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+    // RxPermission
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.1'
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
+
+    // Async task
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5'
 }

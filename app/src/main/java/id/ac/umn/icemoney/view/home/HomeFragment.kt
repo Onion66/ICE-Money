@@ -11,10 +11,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jakewharton.threetenabp.AndroidThreeTen
 import id.ac.umn.icemoney.AddTransactionActivity
+import id.ac.umn.icemoney.LoginActivity
 import id.ac.umn.icemoney.R
 import id.ac.umn.icemoney.UpdateTransactionActivity
 import id.ac.umn.icemoney.adapter.TransactionMainAdapter
 import id.ac.umn.icemoney.entity.Transaction
+import id.ac.umn.icemoney.utils.NotificationUtils
 import id.ac.umn.icemoney.utils.TransactionUtils
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.lang.Math.abs
@@ -29,6 +31,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         transactionViewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -56,7 +59,24 @@ class HomeFragment : Fragment() {
 
         transactionViewModel.transactionList.observe(this, {
             transactionAdapter?.setDataList(it)
+
+            // No Data Image
+            if(transactionAdapter?.itemCount == 0){
+                //if data isn't available, show the empty text
+                noData.visibility = View.VISIBLE
+            }else{
+                //if data is available, don't show the empty text
+                noData.visibility = View.GONE
+            }
+
             val transaction = TransactionUtils.getTotalExpense(it)
+
+            // Notification nilai pengeluaran dan pemasukan
+            val intent = Intent(activity, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            NotificationUtils.sendNotification(transaction.total, intent, requireContext())
+
+            // Set nilai pengeluaran dan pemasukan
             tvTransactionTotalExpense.text = "Rp. ${transaction.expense}"
             tvTransactionTotalIncome.text = "Rp. ${transaction.income}"
             if (transaction.total < 0) tvTransactionTotal.setTextColor(Color.parseColor("#E74C3C"))
@@ -102,8 +122,8 @@ class HomeFragment : Fragment() {
         }
         builder.setNegativeButton("No"){_,_ ->
         }
-        builder.setTitle("Delete everything")
-        builder.setMessage("are you sure?")
+        builder.setTitle("Hapus data lokal")
+        builder.setMessage("Apakah Anda yakin?")
         builder.create().show()
     }
 
