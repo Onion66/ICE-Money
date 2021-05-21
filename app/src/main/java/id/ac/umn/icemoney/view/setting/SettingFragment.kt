@@ -21,7 +21,6 @@ import id.ac.umn.icemoney.entity.Transaction
 import id.ac.umn.icemoney.view.home.TransactionViewModel
 import id.ac.umn.icemoney.view.settings.SettingViewModel
 import java.lang.Exception
-import java.util.*
 
 class SettingFragment : Fragment() {
 

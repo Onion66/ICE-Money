@@ -12,7 +12,7 @@ import id.ac.umn.icemoney.model.TransactionSummary
 import kotlinx.android.synthetic.main.item_expense_detail.view.*
 
 class TransactionSubAdapter(
-    val transactions : TransactionSummary
+    val transactions : List<Transaction>
 ) : RecyclerView.Adapter<ViewHolder>() {
     var data : List<Transaction> = mutableListOf()
 
@@ -31,16 +31,18 @@ class TransactionSubAdapter(
         )
     }
 
-    override fun getItemCount(): Int = transactions.data.size
+    override fun getItemCount(): Int = transactions.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.name.text = transactions.data[position].name
-        holder.amount.text = "Rp. ${transactions.data[position].amount}"
-        holder.payment.text = transactions.data[position].paymentMethod
-        holder.category.text = transactions.data[position].category
-        if (transactions.data[position].isIncome) holder.amount.setTextColor(Color.parseColor("#3498DB"))
+        holder.name.text = transactions[position].name
+        holder.amount.text = "Rp. ${transactions[position].amount}"
+        holder.payment.text = transactions[position].paymentMethod
+        holder.category.text = transactions[position].category
+        if (transactions[position].isIncome) holder.amount.setTextColor(Color.parseColor("#3498DB"))
         else holder.amount.setTextColor(Color.parseColor("#E74C3C"))
     }
+
+    fun getTransactionByPosition(position: Int) : Transaction = transactions[position]
 
     fun setDataList(list : List<Transaction>) {
         data = list

@@ -3,6 +3,7 @@ package id.ac.umn.icemoney.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.umn.icemoney.R
@@ -13,6 +14,8 @@ import id.ac.umn.icemoney.utils.TransactionUtils
 import kotlinx.android.synthetic.main.item_expense_date_amount.view.*
 
 class TransactionMainAdapter : RecyclerView.Adapter<ViewHolder>() {
+    private var onItemSwipeListener: OnItemSwipeListener? = null
+
     var data : List<TransactionSummary> = listOf()
 //    val adapter : TransactionSubAdapter = TransactionSubAdapter()
     val viewPool = RecyclerView.RecycledViewPool()
@@ -46,6 +49,7 @@ class TransactionMainAdapter : RecyclerView.Adapter<ViewHolder>() {
         else holder.expense.visibility = View.VISIBLE
         holder.itemView.tag = position
         holder.itemView.setOnClickListener {  }
+        val childAdapter = TransactionSubAdapter(data[position].data)
 //        holder.itemView.rvSubItems.adapter = adapter
 //        holder.itemView.rvSubItems.setRecycledViewPool(viewPool)
         val childLayoutManager = LinearLayoutManager(holder.itemView.rvSubItems.context,
@@ -53,8 +57,31 @@ class TransactionMainAdapter : RecyclerView.Adapter<ViewHolder>() {
 //        holder.itemView.rvSubItems.layoutManager = childLayoutManager
         holder.itemView.rvSubItems.apply {
             layoutManager = childLayoutManager
-            adapter = TransactionSubAdapter(data[position])
+            adapter = childAdapter
             setRecycledViewPool(viewPool)
+            ItemTouchHelper(
+                object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+                    override fun onMove(
+                        recyclerView: RecyclerView,
+                        viewHolder: RecyclerView.ViewHolder,
+                        target: RecyclerView.ViewHolder
+                    ): Boolean {
+                        return false
+                    }
+
+                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                        if (viewHolder.adapterPosition < childAdapter.itemCount) {
+                            val transaction = childAdapter.getTransactionByPosition(viewHolder.adapterPosition)
+                            if (transaction != null) {
+                                if (direction == ItemTouchHelper.LEFT) onItemSwipeListener?.deleteItem(transaction)
+                                else onItemSwipeListener?.updateItem(transaction)
+                                childAdapter.notifyDataSetChanged()
+                                notifyDataSetChanged()
+                            }
+                        }
+                    }
+                }
+            ).attachToRecyclerView(this)
         }
 //        adapter.setDataList(data[position].data)
     }
@@ -62,5 +89,14 @@ class TransactionMainAdapter : RecyclerView.Adapter<ViewHolder>() {
     fun setDataList(list : List<Transaction>) {
         data = TransactionUtils.groupTransactionByDate(list)
         notifyDataSetChanged()
+    }
+
+    fun setOnItemSwipeListener(onItemSwipeListener: OnItemSwipeListener) {
+        this.onItemSwipeListener = onItemSwipeListener
+    }
+
+    interface OnItemSwipeListener {
+        fun updateItem(transaction: Transaction)
+        fun deleteItem(transaction: Transaction)
     }
 }

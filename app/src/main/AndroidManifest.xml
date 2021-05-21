@@ -11,12 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ICEMoney">
-        <activity android:name=".AboutUsActivity"
-            android:parentActivityName=".HomeActivity"
-            />
+        <activity
+            android:name=".AboutUsActivity"
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".AddTransactionActivity"
             android:label="@string/title_activity_add_transaction"
+            android:theme="@style/Theme.ICEMoney.NoActionBar" />
+        <activity
+            android:name=".UpdateTransactionActivity"
+            android:label="Ubah Transaksi"
             android:theme="@style/Theme.ICEMoney.NoActionBar" />
         <activity
             android:name=".MainActivity"

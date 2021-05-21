@@ -5,47 +5,45 @@ import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 import id.ac.umn.icemoney.entity.Transaction
-import id.ac.umn.icemoney.view.home.TransactionViewModel
 import kotlinx.android.synthetic.main.activity_add_transaction.*
-import org.threeten.bp.LocalDateTime
-import org.threeten.bp.format.DateTimeFormatter
-import java.util.*
 
-class AddTransactionActivity : AppCompatActivity() {
+class UpdateTransactionActivity : AppCompatActivity() {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<FrameLayout>
-//    private lateinit var transactionViewModel: TransactionViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-//        transactionViewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
         setContentView(R.layout.activity_add_transaction)
 
-        // Set Current Time
-        val currentDate = LocalDateTime.now()
-        val formatTime: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-        tvInputAddTransactionDate.text = currentDate.format(formatTime)
+        val id : String
 
-        initBottomSheet()
+        if (intent.hasExtra("data")) {
+            val data = intent.getSerializableExtra("data") as Transaction
+            tvInputAddTransactionName.setText(data.name)
+            tvInputAddTransactionAmount.text = data.amount.toString()
+            tvInputAddTransactionType.text = if (data.isIncome) "Pemasukan" else "Pengeluaran"
+            tvInputAddTransactionCategory.text = data.category
+            tvInputAddTransactionPayment.text = data.paymentMethod
+            tvInputAddTransactionDate.text = data.date
+            id = data.id
+        } else {
+            id = "X"
+        }
 
-//        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager, bottomSheetBehavior)
-//        val viewPager: ViewPager = findViewById(R.id.view_pager)
-//        viewPager.adapter = sectionsPagerAdapter
-//        val tabs: TabLayout = findViewById(R.id.tabs)
-//        tabs.setupWithViewPager(viewPager)
-//        val fab: FloatingActionButton = findViewById(R.id.fab)
+        fabSaveTransaction.setOnClickListener {
+            setResult(RESULT_OK, Intent().putExtra("data", Transaction(
+                id,
+                tvInputAddTransactionAmount.text.toString().toLong(),
+                tvInputAddTransactionCategory.text.toString(),
+                tvInputAddTransactionDate.text.toString(),
+                tvInputAddTransactionType.text.equals("Pemasukan"),
+                tvInputAddTransactionName.text.toString(),
+                tvInputAddTransactionPayment.text.toString()
+            )))
+            finish()
+        }
 
-        // Event Listeners Here
-        initUICallBack()
-    }
-
-    private fun initBottomSheet() {
         bottomSheetBehavior = BottomSheetBehavior.from(inputBottomSheet).apply {
             peekHeight = 0
             this.state = BottomSheetBehavior.STATE_COLLAPSED
@@ -70,73 +68,40 @@ class AddTransactionActivity : AppCompatActivity() {
                     .setDuration(
                         0
                     ).withEndAction {
-                    if (slideOffset == 1.0F) {
-                        fabSaveTransaction.visibility = View.GONE
-                    } else if (slideOffset == 0.0F) {
-                        fabSaveTransaction.visibility = View.VISIBLE
-                        dpInputDate.visibility = View.GONE
-                        scInputType.visibility = View.GONE
-                        llInputAmount.visibility = View.GONE
-                        scInputPayment.visibility = View.GONE
-                        scInputCategory.visibility = View.GONE
-                        tvInputAddTransactionType.isEnabled = true
-                        tvInputAddTransactionPayment.isEnabled = true
-                        tvInputAddTransactionCategory.isEnabled = true
-                        tvInputAddTransactionAmount.isEnabled = true
-                        tvInputAddTransactionDate.isEnabled = true
-                    }
-                }.withStartAction {
-                    if (slideOffset == 0.0F) {
-                        fabSaveTransaction.visibility = View.VISIBLE
-                        dpInputDate.visibility = View.GONE
-                        scInputType.visibility = View.GONE
-                        llInputAmount.visibility = View.GONE
-                        scInputPayment.visibility = View.GONE
-                        scInputCategory.visibility = View.GONE
-                        tvInputAddTransactionType.isEnabled = true
-                        tvInputAddTransactionPayment.isEnabled = true
-                        tvInputAddTransactionCategory.isEnabled = true
-                        tvInputAddTransactionAmount.isEnabled = true
-                        tvInputAddTransactionDate.isEnabled = true
-                    } else if (slideOffset == 1.0F) {
-                        fabSaveTransaction.visibility = View.GONE
-                    }
-                }.start()
+                        if (slideOffset == 1.0F) {
+                            fabSaveTransaction.visibility = View.GONE
+                        } else if (slideOffset == 0.0F) {
+                            fabSaveTransaction.visibility = View.VISIBLE
+                            dpInputDate.visibility = View.GONE
+                            scInputType.visibility = View.GONE
+                            llInputAmount.visibility = View.GONE
+                            scInputPayment.visibility = View.GONE
+                            scInputCategory.visibility = View.GONE
+                            tvInputAddTransactionType.isEnabled = true
+                            tvInputAddTransactionPayment.isEnabled = true
+                            tvInputAddTransactionCategory.isEnabled = true
+                            tvInputAddTransactionAmount.isEnabled = true
+                            tvInputAddTransactionDate.isEnabled = true
+                        }
+                    }.withStartAction {
+                        if (slideOffset == 0.0F) {
+                            fabSaveTransaction.visibility = View.VISIBLE
+                            dpInputDate.visibility = View.GONE
+                            scInputType.visibility = View.GONE
+                            llInputAmount.visibility = View.GONE
+                            scInputPayment.visibility = View.GONE
+                            scInputCategory.visibility = View.GONE
+                            tvInputAddTransactionType.isEnabled = true
+                            tvInputAddTransactionPayment.isEnabled = true
+                            tvInputAddTransactionCategory.isEnabled = true
+                            tvInputAddTransactionAmount.isEnabled = true
+                            tvInputAddTransactionDate.isEnabled = true
+                        } else if (slideOffset == 1.0F) {
+                            fabSaveTransaction.visibility = View.GONE
+                        }
+                    }.start()
             }
         })
-    }
-
-    private fun initUICallBack() {
-        fabSaveTransaction.setOnClickListener { view ->
-            val trx = Transaction(
-                date = tvInputAddTransactionDate.text.toString() + " 00:00",
-                amount = tvInputAddTransactionAmount.text.toString().toLong(),
-                isIncome = tvInputAddTransactionType.text.toString().equals("Pemasukan", true),
-                category = tvInputAddTransactionCategory.text.toString(),
-                paymentMethod = tvInputAddTransactionPayment.text.toString(),
-                name = tvInputAddTransactionName.text.toString(),
-                id = UUID.randomUUID().toString()
-            )
-
-            setResult(RESULT_OK, Intent().putExtra("data", trx))
-
-            // Save to Firebase (Cloud)
-            val id = FirebaseAuth.getInstance().currentUser.uid
-            val database = FirebaseDatabase.getInstance().reference
-            val idFirebase = database.push().key
-            // Path di Realtime Firebase = idUser > idUnik
-            database.child(id).child(idFirebase!!).setValue(trx).addOnSuccessListener {
-                // Snackbar notification
-                Snackbar.make(view, "Sukses menambahkan transaksi", Snackbar.LENGTH_SHORT)
-                    .setAction("Action", null).show()
-            }.addOnFailureListener{
-                // Snackbar notification
-                Snackbar.make(view, "Gagal menyimpan transaksi ke internet", Snackbar.LENGTH_SHORT)
-                    .setAction("Action", null).show()
-            }
-
-            finish()
-        }
 
         tvInputAddTransactionAmount.setOnClickListener {
             llInputAmount.visibility = View.VISIBLE
@@ -238,7 +203,7 @@ class AddTransactionActivity : AppCompatActivity() {
             }
             tvInputAddTransactionDate.text = "${day}-${month}-${year}"
         }
-        
+
         scInputType.setOnItemSelectedListener { scrollChoice, position, name ->
             tvInputAddTransactionType.text = name.toString()
         }

@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.home.HomeFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".view.home.HomeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,90 +12,90 @@
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_marginTop="10dp"
             android:id="@+id/clInformation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
             <LinearLayout
                 android:id="@+id/layoutPendapatan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/layoutPengeluaran"
-                app:layout_constraintTop_toTopOf="parent"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Pendapatan"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:text="Pendapatan" />
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/tvTransactionTotalIncome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Rp 1000"
                     android:textAlignment="center"
-                    android:textColor="@color/blue"
-                    android:text="Rp 1000" />
+                    android:textColor="@color/blue" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/layoutPengeluaran"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/layoutPendapatan"
                 app:layout_constraintRight_toLeftOf="@id/layoutTotal"
-                app:layout_constraintTop_toTopOf="parent"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Pengeluaran"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:text="Pengeluaran" />
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/tvTransactionTotalExpense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Rp 500"
                     android:textAlignment="center"
-                    android:textColor="@color/red"
-                    android:text="Rp 500" />
+                    android:textColor="@color/red" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/layoutTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/layoutPengeluaran"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:orientation="vertical"
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Total"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:text="Total" />
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/tvTransactionTotal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Rp 500"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:text="Rp 500" />
+                    android:textColor="@color/black" />
 
             </LinearLayout>
 
@@ -105,27 +103,36 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray" />
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvTransactionList"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        </ScrollView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvTransactionList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
 
         <LinearLayout
             android:id="@+id/noData"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             android:visibility="invisible">
 
             <ImageView
@@ -144,22 +151,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/black"
                 android:text="Tidak ada data"
-                android:textAppearance="?android:textAppearanceMedium" />
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/black" />
 
         </LinearLayout>
 
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        style="@style/ww"
         android:id="@+id/fabAddTransaction"
-        android:layout_margin="16dp"
-        app:srcCompat="@android:drawable/ic_input_add"
+        style="@style/ww"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"/>
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 </FrameLayout>
 
