@@ -34,6 +34,7 @@ class AddTransactionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         transactionViewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
         setContentView(R.layout.activity_add_transaction)
 
@@ -127,6 +128,22 @@ class AddTransactionActivity : AppCompatActivity() {
                 name = tvInputAddTransactionName.text.toString(),
                 id = UUID.randomUUID().toString()
             )
+
+            var namaItem = tvInputAddTransactionName.text.toString().trim()
+//            var hargaItem = tvInputAddTransactionAmount.text.toString().trim()
+
+            //input validation
+            if(namaItem.isEmpty()){
+                tvInputAddTransactionName.error = "Nama Item harus diisi!"
+                tvInputAddTransactionName.requestFocus()
+                return@setOnClickListener
+            }
+
+//            if(hargaItem.isEmpty()){
+//                tvInputAddTransactionName.error = "Harga Item harus diisi!"
+//                tvInputAddTransactionName.requestFocus()
+//                return@setOnClickListener
+//            }
 
             Log.i("trx", trx.toString())
 
@@ -254,6 +271,8 @@ class AddTransactionActivity : AppCompatActivity() {
         scInputCategory.setOnItemSelectedListener { scrollChoice, position, name ->
             tvInputAddTransactionCategory.text = name.toString()
         }
+
+
 
         // Keyboard
         btnInputOne.setOnClickListener {

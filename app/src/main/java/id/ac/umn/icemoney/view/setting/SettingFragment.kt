@@ -109,41 +109,46 @@ class SettingFragment : Fragment() {
             })
 
             database.child("transaksi").child(id).get().addOnSuccessListener {
-                val dataCloud = it.children
-                dataCloud.forEach{
-                    Log.i("fullData", it.toString())
-                    val currentIdCloud = it.child("id").value.toString()
-                    Log.i("currentIdCloud", currentIdCloud)
-                    Log.i("listId", listIds.toString())
-                    // Cek apakah id cloud tidak sama dgn local
-                    if(!listIds.contains(currentIdCloud)){
-                        var trx = Transaction(
-                            date = it.child("date").value.toString(),
-                            amount = it.child("amount").value.toString().toLong(),
-                            isIncome = it.child("income").value.toString().toBoolean(),
-                            category = it.child("category").value.toString(),
-                            paymentMethod = it.child("paymentMethod").value.toString(),
-                            name = it.child("name").value.toString(),
-                            id = it.child("id").value.toString()
-                        )
-                        Log.i("trxRetrieve", trx.toString())
+                if(it.exists()){
+                    val dataCloud = it.children
+                    dataCloud.forEach{
+                        Log.i("fullData", it.toString())
+                        val currentIdCloud = it.child("id").value.toString()
+                        Log.i("currentIdCloud", currentIdCloud)
+                        Log.i("listId", listIds.toString())
+                        // Cek apakah id cloud tidak sama dgn local
+                        if(!listIds.contains(currentIdCloud)){
+                            val trx = Transaction(
+                                date = it.child("date").value.toString(),
+                                amount = it.child("amount").value.toString().toLong(),
+                                isIncome = it.child("income").value.toString().toBoolean(),
+                                category = it.child("category").value.toString(),
+                                paymentMethod = it.child("paymentMethod").value.toString(),
+                                name = it.child("name").value.toString(),
+                                id = it.child("id").value.toString()
+                            )
+                            Log.i("trxRetrieve", trx.toString())
 
-                        // Add to DAO
-                        transactionViewModel.addTransaction(trx)
-                        // Snackbar notification
-                        Snackbar.make(
-                            view,
-                            "Sukses mengupdate transaksi dan tersimpan di lokal.",
-                            Snackbar.LENGTH_SHORT
-                        )
-                            .setAction("OK") { }.show()
-                    }else{
-                        // Snackbar notification
-                        Snackbar.make(view, "Transaksi lokal sudah terbaru.", Snackbar.LENGTH_SHORT)
-                            .setAction("OK") { }.show()
+                            // Add to DAO
+                            transactionViewModel.addTransaction(trx)
+                            // Snackbar notification
+                            Snackbar.make(
+                                view,
+                                "Sukses mengupdate transaksi dan tersimpan di lokal.",
+                                Snackbar.LENGTH_SHORT
+                            )
+                                .setAction("OK") { }.show()
+                        }else{
+                            // Snackbar notification
+                            Snackbar.make(view, "Transaksi lokal sudah terbaru.", Snackbar.LENGTH_SHORT)
+                                .setAction("OK") { }.show()
+                        }
                     }
+                }else{
+                    // Snackbar notification
+                    Snackbar.make(view, "Tidak ada data di internet.", Snackbar.LENGTH_SHORT)
+                        .setAction("OK") { }.show()
                 }
-
 
             }.addOnFailureListener{
                 // Snackbar notification
