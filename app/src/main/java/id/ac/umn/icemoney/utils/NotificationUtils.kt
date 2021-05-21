@@ -27,22 +27,9 @@ object NotificationUtils {
         }else if(money >= 0){
             textStatus = "Profit"
         }
-
         return textStatus
     }
 
-//    private fun timeStatus(status: Int): String {
-//        var textStatus = ""
-//        if(status == 1){
-//            textStatus = "Days"
-//        }else if(status == 2){
-//            textStatus = "Weekly"
-//        }else if(status == 3){
-//            textStatus = "Monthly"
-//        }
-//
-//        return textStatus
-//    }
 
     //notification
     fun createNotificationChannel(notificationManager: NotificationManager){
@@ -63,8 +50,8 @@ object NotificationUtils {
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_ice_money_square)
-            .setContentTitle("Your Expense: Rp${money.toInt()}")
-            .setContentText("Money Status: [${moneyStatus(money)}]")
+            .setContentTitle("Saldo Anda: Rp${money.toInt()}")
+            .setContentText("Status uang: [${moneyStatus(money)}]")
 //            .setSubText("${timeStatus(timeNotif)} notification")
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
