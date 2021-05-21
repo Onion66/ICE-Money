@@ -55,15 +55,7 @@ class DashboardFragment : Fragment() {
         transactionViewModel.transactionList.observe(viewLifecycleOwner, Observer {
             expenseList = TransactionUtils.getExpenseByMonth(it, currentMonth)
             val toChart = mutableListOf<List<Any>>()
-            val listKategori = listOf(
-                "Makanan",
-                "Minuman",
-                "Transportasi",
-                "Kesehatan",
-                "Pendidikan",
-                "Hiburan",
-                "Lain-lain"
-            )
+            val listKategori = TransactionUtils.listKategori
             val listKategoriMap = mutableListOf(
                 0,0,0,0,0,0,0
             )

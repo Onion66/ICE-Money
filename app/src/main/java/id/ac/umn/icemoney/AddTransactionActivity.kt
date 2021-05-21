@@ -19,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import id.ac.umn.icemoney.entity.Transaction
+import id.ac.umn.icemoney.utils.TransactionUtils
 import id.ac.umn.icemoney.view.dashboard.DashboardFragment
 import id.ac.umn.icemoney.view.home.TransactionViewModel
 import kotlinx.android.synthetic.main.activity_add_transaction.*
@@ -164,15 +165,7 @@ class AddTransactionActivity : AppCompatActivity() {
 
         tvInputAddTransactionCategory.setOnClickListener {
             scInputCategory.addItems(
-                listOf(
-                    "Makanan",
-                    "Minuman",
-                    "Transportasi",
-                    "Kesehatan",
-                    "Pendidikan",
-                    "Hiburan",
-                    "Lain-lain"
-                ), 0
+                TransactionUtils.listKategori,0
             )
             scInputCategory.visibility = View.VISIBLE
             tvInputAddTransactionType.isEnabled = false

@@ -10,9 +10,16 @@ import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
 
 object TransactionUtils {
-    val dateFormatterFull: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
     val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-    val timeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+    val listKategori = listOf(
+        "Makanan",
+        "Minuman",
+        "Transportasi",
+        "Kesehatan",
+        "Pendidikan",
+        "Hiburan",
+        "Lain-lain"
+    )
 
     fun groupTransactionByDate(list : List<Transaction>) : List<TransactionSummary> {
         val groupByTime = list.groupBy { it.date.take(10) }
