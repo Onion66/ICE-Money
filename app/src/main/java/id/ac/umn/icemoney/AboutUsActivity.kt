@@ -13,17 +13,25 @@ class AboutUsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about_us)
 
-        image_daniel.setImageBitmap(getBitmapFromAssets("foto_daniel.jpg"))
-        desc_daniel.text = "Daniel Wijaya\nEhehehehehe"
+        image_1.setImageBitmap(getBitmapFromAssets("foto_jojo.jpg"))
+        desc_1_nama.text = "Jonathan"
+        desc_1_email.text = "jonathan8@student.umn.ac.id"
+        desc_1_nim.text = "00000030182"
 
-        image_jojo.setImageBitmap(getBitmapFromAssets("foto_daniel.jpg"))
-        desc_jojo.text = "Jojo ehehe\nEhehehehehe"
+        image_2.setImageBitmap(getBitmapFromAssets("foto_darren.jpg"))
+        desc_2_nama.text = "Alfonso Darren Vincentio"
+        desc_2_email.text = "alfonso.vincentio@student.umn.ac.id"
+        desc_2_nim.text = "00000029324"
 
-        image_darren.setImageBitmap(getBitmapFromAssets("foto_daniel.jpg"))
-        desc_darren.text = "Darren ehe\nEhehehehehe"
+        image_3.setImageBitmap(getBitmapFromAssets("foto_chendra.jpg"))
+        desc_3_nama.text = "Chendra Dewangga"
+        desc_3_email.text = "chendra.dewangga@student.umn.ac.id"
+        desc_3_nim.text = "00000029610"
 
-        image_chendra.setImageBitmap(getBitmapFromAssets("foto_daniel.jpg"))
-        desc_chendra.text = "Chendra :)\nEhehehehehe"
+        image_4.setImageBitmap(getBitmapFromAssets("foto_daniel.jpg"))
+        desc_4_nama.text = "Daniel Wijaya"
+        desc_4_email.text = "daniel.wijaya2@student.umn.ac.id"
+        desc_4_nim.text = "00000029854"
     }
 
     private fun getBitmapFromAssets(fileName: String): Bitmap? {
