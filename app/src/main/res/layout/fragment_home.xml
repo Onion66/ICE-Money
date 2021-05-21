@@ -110,16 +110,19 @@
             android:layout_height="1dp"
             android:background="@android:color/darker_gray"/>
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvTransactionList"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:nestedScrollingEnabled="false" />
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
         <LinearLayout
             android:id="@+id/noData"
