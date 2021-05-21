@@ -20,7 +20,9 @@ object TransactionUtils {
         var expense: Long
         var income: Long
 
-        groupByTime.mapValues { (date, data) ->
+        val sortedReverse = groupByTime.toSortedMap(Comparator.reverseOrder())
+
+        sortedReverse.mapValues { (date, data) ->
             expense = 0
             income = 0
             data.forEach {
