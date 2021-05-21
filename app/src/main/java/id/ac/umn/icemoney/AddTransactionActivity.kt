@@ -1,16 +1,25 @@
 package id.ac.umn.icemoney
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import id.ac.umn.icemoney.entity.Transaction
+import id.ac.umn.icemoney.view.dashboard.DashboardFragment
 import id.ac.umn.icemoney.view.home.TransactionViewModel
 import kotlinx.android.synthetic.main.activity_add_transaction.*
 import org.threeten.bp.LocalDateTime
@@ -23,8 +32,6 @@ class AddTransactionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
 
         transactionViewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
         setContentView(R.layout.activity_add_transaction)
