@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
@@ -28,7 +29,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import id.ac.umn.icemoney.AboutUsActivity
 import id.ac.umn.icemoney.LoginActivity
-import id.ac.umn.icemoney.MainActivity
 import id.ac.umn.icemoney.R
 import id.ac.umn.icemoney.entity.Transaction
 import id.ac.umn.icemoney.view.home.TransactionViewModel
@@ -140,7 +140,11 @@ class SettingFragment : Fragment() {
                                 .setAction("OK") { }.show()
                         }else{
                             // Snackbar notification
-                            Snackbar.make(view, "Transaksi lokal sudah terbaru.", Snackbar.LENGTH_SHORT)
+                            Snackbar.make(
+                                view,
+                                "Transaksi lokal sudah terbaru.",
+                                Snackbar.LENGTH_SHORT
+                            )
                                 .setAction("OK") { }.show()
                         }
                     }
@@ -204,6 +208,9 @@ class SettingFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK){
+            val extras = data!!.extras
+            val imageBitmap = extras!!["data"] as Bitmap?
+
             Snackbar.make(requireView(), "Sukses menyimpan gambar", Snackbar.LENGTH_SHORT)
                 .setAction("Action", null).show()
         }
