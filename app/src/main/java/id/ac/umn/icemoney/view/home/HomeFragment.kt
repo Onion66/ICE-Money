@@ -1,12 +1,11 @@
 package id.ac.umn.icemoney.view.home
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -149,5 +148,28 @@ class HomeFragment : Fragment() {
         fabAddTransaction.setOnClickListener {
             activity?.startActivity(Intent(activity, AddTransactionActivity::class.java))
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_delete, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.menu_delete){
+            deleteAll()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteAll() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setPositiveButton("Yes"){_,_ ->
+            transactionViewModel.deleteAll()
+        }
+        builder.setNegativeButton("No"){_,_ ->
+        }
+        builder.setTitle("Delete everything")
+        builder.setMessage("are you sure?")
+        builder.create().show()
     }
 }

@@ -23,4 +23,10 @@ class TransactionViewModel(application: Application): AndroidViewModel(applicati
             transactionRepo.addTransaction(transaction)
         }
     }
+
+    fun deleteAll(){
+        viewModelScope.launch(Dispatchers.IO){
+            transactionRepo.clearTransactions()
+        }
+    }
 }
