@@ -54,10 +54,40 @@ class DashboardFragment : Fragment() {
 
         transactionViewModel.transactionList.observe(viewLifecycleOwner, Observer {
             expenseList = TransactionUtils.getExpenseByMonth(it, currentMonth)
-            var toChart = mutableListOf<List<Any>>()
+            val toChart = mutableListOf<List<Any>>()
+            val listKategori = listOf(
+                "Makanan",
+                "Minuman",
+                "Transportasi",
+                "Kesehatan",
+                "Pendidikan",
+                "Hiburan",
+                "Lain-lain"
+            )
+            val listKategoriMap = mutableListOf(
+                0,0,0,0,0,0,0
+            )
+
             expenseList.forEach {
-                toChart.add(listOf(it.name, it.amount))
+                when(it.name) {
+                    listKategori[0] -> listKategoriMap[0] += it.amount.toInt()
+                    listKategori[1] -> listKategoriMap[1] += it.amount.toInt()
+                    listKategori[2] -> listKategoriMap[2] += it.amount.toInt()
+                    listKategori[3] -> listKategoriMap[3] += it.amount.toInt()
+                    listKategori[4] -> listKategoriMap[4] += it.amount.toInt()
+                    listKategori[5] -> listKategoriMap[5] += it.amount.toInt()
+                    listKategori[6] -> listKategoriMap[6] += it.amount.toInt()
+                }
+//                toChart.add(listOf(it.name,it.amount))
             }
+
+            listKategori.forEachIndexed {idx, element ->
+                if(listKategoriMap[idx] != 0){
+                    toChart.add(listOf(listKategori[idx],listKategoriMap[idx]))
+                }
+            }
+            Log.i("listKategoriMap","${listKategoriMap.toList()}")
+            Log.i("toChart","${toChart.toList()}")
 
             val aaChartModel : AAChartModel = AAChartModel()
                 .chartType(AAChartType.Pie)
