@@ -35,7 +35,7 @@ class TransactionSubAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.name.text = transactions.data[position].name
-        holder.amount.text = transactions.data[position].amount.toString()
+        holder.amount.text = "Rp. ${transactions.data[position].amount}"
         holder.payment.text = transactions.data[position].paymentMethod
         holder.category.text = transactions.data[position].category
         if (transactions.data[position].isIncome) holder.amount.setTextColor(Color.parseColor("#3498DB"))
