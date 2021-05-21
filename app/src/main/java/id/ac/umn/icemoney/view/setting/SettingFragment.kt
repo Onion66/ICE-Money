@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +33,16 @@ import id.ac.umn.icemoney.LoginActivity
 import id.ac.umn.icemoney.R
 import id.ac.umn.icemoney.entity.Transaction
 import id.ac.umn.icemoney.view.home.TransactionViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import org.json.JSONTokener
+import java.io.ByteArrayOutputStream
+import java.io.OutputStreamWriter
+import java.net.URL
+import javax.net.ssl.HttpsURLConnection
 
 
 class SettingFragment : Fragment() {
@@ -68,7 +79,7 @@ class SettingFragment : Fragment() {
         emailUserText.text = FirebaseAuth.getInstance().currentUser.email
 
         // Ganti Gambar
-        val idFirebase = database.push().key
+        val idFirebase = database.push().key.toString()
         val gantiGambarButton: Button = root.findViewById(R.id.gantiGambar)
         gantiGambarButton.setOnClickListener { view ->
             Intent(MediaStore.ACTION_IMAGE_CAPTURE).also {
@@ -78,20 +89,6 @@ class SettingFragment : Fragment() {
                     }
                 }
             }
-
-            // TODO: Simpan data ke IMGUR dan return URL
-//            val urlImage = "test"
-//
-//            // Simpan ke firebase
-//            database.child("gambarProfile").child(id).child(idFirebase!!).setValue(urlImage).addOnSuccessListener {
-//                // Snackbar notification
-//                Snackbar.make(view, "Sukses menyimpan gambar", Snackbar.LENGTH_SHORT)
-//                    .setAction("Action", null).show()
-//            }.addOnFailureListener{
-//                // Snackbar notification
-//                Snackbar.make(view, "Gagal menyimpan gambar ke internet", Snackbar.LENGTH_SHORT)
-//                    .setAction("Action", null).show()
-//            }
         }
 
 
@@ -211,9 +208,82 @@ class SettingFragment : Fragment() {
             val extras = data!!.extras
             val imageBitmap = extras!!["data"] as Bitmap?
 
-            Snackbar.make(requireView(), "Sukses menyimpan gambar", Snackbar.LENGTH_SHORT)
-                .setAction("Action", null).show()
+            if (imageBitmap != null) {
+                uploadImageToImgur(imageBitmap)
+            }
         }
+    }
+
+    private fun getBase64Image(image: Bitmap, complete: (String) -> Unit) {
+        GlobalScope.launch {
+            val outputStream = ByteArrayOutputStream()
+            image.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+            val b = outputStream.toByteArray()
+            complete(Base64.encodeToString(b, Base64.DEFAULT))
+        }
+    }
+
+    private val CLIENT_ID = "a199127d5918115"
+
+    private fun uploadImageToImgur(image: Bitmap) {
+        getBase64Image(image, complete = { base64Image ->
+            GlobalScope.launch(Dispatchers.Default) {
+                val url = URL("https://api.imgur.com/3/image")
+
+                val boundary = "Boundary-${System.currentTimeMillis()}"
+
+                val httpsURLConnection =
+                    withContext(Dispatchers.IO) { url.openConnection() as HttpsURLConnection }
+                httpsURLConnection.setRequestProperty("Authorization", "Client-ID $CLIENT_ID")
+                httpsURLConnection.setRequestProperty(
+                    "Content-Type",
+                    "multipart/form-data; boundary=$boundary"
+                )
+
+                httpsURLConnection.requestMethod = "POST"
+                httpsURLConnection.doInput = true
+                httpsURLConnection.doOutput = true
+
+                var body = ""
+                body += "--$boundary\r\n"
+                body += "Content-Disposition:form-data; name=\"image\""
+                body += "\r\n\r\n$base64Image\r\n"
+                body += "--$boundary--\r\n"
+
+
+                val outputStreamWriter = OutputStreamWriter(httpsURLConnection.outputStream)
+                withContext(Dispatchers.IO) {
+                    outputStreamWriter.write(body)
+                    outputStreamWriter.flush()
+                }
+
+
+                val response = httpsURLConnection.inputStream.bufferedReader()
+                    .use { it.readText() }  // defaults to UTF-8
+                val jsonObject = JSONTokener(response).nextValue() as JSONObject
+                val data = jsonObject.getJSONObject("data")
+
+                val linkUploaded = data.getString("link")
+                Log.d("TAG", "Link is : ${linkUploaded}")
+
+//                val database = FirebaseDatabase.getInstance().reference
+//                val id = FirebaseAuth.getInstance().currentUser.uid
+
+//                // Simpan ke firebase
+//                database.child("gambarProfile").child(id).child(idFirebase!!).setValue(linkUploaded).addOnSuccessListener {
+//                    // Snackbar notification
+//                    Snackbar.make(requireView(), "Sukses menyimpan gambar", Snackbar.LENGTH_SHORT)
+//                        .setAction("Action", null).show()
+//                }.addOnFailureListener{
+//                    // Snackbar notification
+//                    Snackbar.make(requireView(), "Gagal menyimpan gambar ke internet", Snackbar.LENGTH_SHORT)
+//                        .setAction("Action", null).show()
+//                }
+
+                Snackbar.make(requireView(), "Sukses menyimpan gambar", Snackbar.LENGTH_SHORT)
+                    .setAction("Action", null).show()
+            }
+        })
     }
 
 }
