@@ -155,7 +155,7 @@ class AddTransactionActivity : AppCompatActivity() {
             val database = FirebaseDatabase.getInstance().reference
             val idFirebase = database.push().key
             // Path di Realtime Firebase = idUser > idUnik
-            database.child(id).child(idFirebase!!).setValue(trx).addOnSuccessListener {
+            database.child("transaksi").child(id).child(idFirebase!!).setValue(trx).addOnSuccessListener {
                 // Snackbar notification
                 Snackbar.make(view, "Sukses menambahkan transaksi", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show()
