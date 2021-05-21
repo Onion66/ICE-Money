@@ -1,5 +1,6 @@
 package id.ac.umn.icemoney.utils
 
+import android.util.Log
 import id.ac.umn.icemoney.entity.Transaction
 import id.ac.umn.icemoney.model.TransactionChart
 import id.ac.umn.icemoney.model.TransactionSummary
@@ -39,11 +40,13 @@ object TransactionUtils {
     fun getExpenseByMonth(list: List<Transaction>, month: String): List<TransactionChart>{
         val groupByMonth = list.groupBy { it.date.take(5).takeLast(2) }
         val listExpense = mutableListOf<TransactionChart>()
+        Log.i("gbm",groupByMonth.toString())
 
         groupByMonth.mapValues { (date, data) ->
             data.forEach {
-                if(!it.isIncome && date.take(5).takeLast(2) == month) listExpense.add(TransactionChart(it.name, it.amount))
+                if(!it.isIncome && date.take(5).takeLast(2) == month) listExpense.add(TransactionChart(it.category, it.amount))
             }
+            Log.i("data",data.toString())
         }
         return listExpense
     }

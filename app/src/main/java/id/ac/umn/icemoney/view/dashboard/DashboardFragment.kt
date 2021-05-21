@@ -63,7 +63,7 @@ class DashboardFragment : Fragment() {
                 .chartType(AAChartType.Pie)
                 .title("Pengeluaran Bulan Ini")
                 .titleStyle(AAStyle().color("#00000"))
-                .subtitle("1 Mei 2021 - 15 Mei 2021 (Now)")
+                .subtitle(currentTime.toString().take(7))
                 .subtitleStyle(AAStyle().color("#00000"))
 //            .backgroundColor("#86B5FC")
                 .dataLabelsEnabled(true)

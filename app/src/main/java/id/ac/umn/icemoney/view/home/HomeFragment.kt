@@ -46,9 +46,9 @@ class HomeFragment : Fragment() {
         transactionViewModel.transactionList.observe(viewLifecycleOwner, Observer {
             adapter.setDataList(it)
             val transaction = TransactionUtils.getTotalExpense(it)
-            tvTransactionTotalExpense.text = transaction.expense.toString()
-            tvTransactionTotalIncome.text = transaction.income.toString()
-            tvTransactionTotal.text = transaction.total.toString()
+            tvTransactionTotalExpense.text = "Rp. ${transaction.expense.toString()}"
+            tvTransactionTotalIncome.text = "Rp. " + transaction.income.toString()
+            tvTransactionTotal.text = "Rp. ${transaction.total.toString()}"
         })
 
         AndroidThreeTen.init(context)

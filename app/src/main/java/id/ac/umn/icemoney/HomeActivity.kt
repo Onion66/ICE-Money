@@ -27,22 +27,8 @@ class HomeActivity : AppCompatActivity() {
             )
         )
 
-        // Check Database Connection
-        var database = FirebaseDatabase.getInstance().reference
-        if (database != null){
-//            database.setValue("Test!!!!!!!!!!!!!!!!")
-            Log.i("database", "test")
-        }
-
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-//        initUICallBack() // Moved to Home Fragment
     }
 
-//    fun initUICallBack() {
-//        fabAddTransaction.setOnClickListener {
-//            startActivity(Intent(this, AddTransactionActivity::class.java))
-//        }
-//    }
 }
