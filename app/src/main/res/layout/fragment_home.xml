@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:text="Rp 500" />
+                    android:text="Rp      " />
 
             </LinearLayout>
 
