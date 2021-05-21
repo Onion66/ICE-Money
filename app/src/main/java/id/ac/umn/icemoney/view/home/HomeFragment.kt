@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -32,8 +33,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         transactionViewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
-//        homeViewModel =
-//            ViewModelProvider(this).get(HomeViewModel::class.java)
         setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_home, container, false)
 
@@ -49,14 +48,24 @@ class HomeFragment : Fragment() {
         transactionViewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
         transactionViewModel.transactionList.observe(viewLifecycleOwner, Observer {
             adapter.setDataList(it)
+
+            // No Data Image
+            if(adapter.itemCount == 0){
+                //if data isn't available, show the empty text
+                noData.visibility = View.VISIBLE
+            }else{
+                //if data is available, don't show the empty text
+                noData.visibility = View.GONE
+            }
+
             val transaction = TransactionUtils.getTotalExpense(it)
-            //notification
+
+            // Notification nilai pengeluaran dan pemasukan
             val intent = Intent(activity, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            val notification = NotificationUtils.sendNotification(transaction.total, intent, requireContext())
+            NotificationUtils.sendNotification(transaction.total, intent, requireContext())
 
-
-
+            // Set nilai pengeluaran dan pemasukan
             tvTransactionTotalExpense.text = "Rp. ${transaction.expense}"
             tvTransactionTotalIncome.text = "Rp. ${transaction.income}"
             if (transaction.total < 0) tvTransactionTotal.setTextColor(Color.parseColor("#E74C3C"))
@@ -66,94 +75,7 @@ class HomeFragment : Fragment() {
         })
 
         AndroidThreeTen.init(context)
-//        if(context != null) {
-//            Log.i("testDate",LocalDateTime.of(1990, 12, 31, 23, 59, 59).toString())
-//            rvTransactionList.apply {
-//                // Test RecyclerView
-//                var transactions = listOf(
-//                    Transaction(
-//                        1,
-//                        20000,
-//                        "Food",
-//                        LocalDateTime.of(2021, 5, 14, 23, 59, 59).toString(),
-//                        false,
-//                        "Cheeseburger",
-//                        "Direct"
-//                    ),
-//                    Transaction(
-//                        2,
-//                        9000,
-//                        "Food",
-//                        LocalDateTime.of(2021, 5, 13, 23, 59, 59).toString(),
-//                        false,
-//                        "Burger",
-//                        "Direct"
-//                    ),
-//                    Transaction(
-//                        3,
-//                        102000,
-//                        "Sales",
-//                        LocalDateTime.of(2021, 5, 14, 23, 59, 59).toString(),
-//                        true,
-//                        "Selling Account",
-//                        "Bank"
-//                    ),
-//                    Transaction(
-//                        4,
-//                        18000,
-//                        "Food",
-//                        LocalDateTime.of(2021, 5, 13, 23, 59, 59).toString(),
-//                        false,
-//                        "Hotdog",
-//                        "Direct"
-//                    )
-//                )
-////                transactions = listOf()
-//
-////                val sorted: MutableList<Any> = mutableListOf()
-//                var mutableDate: LocalDateTime
-//                var count = 0
-//                var temp: TransactionSummary
-//
-//                if(transactions.isEmpty()){
-//                    //if data isn't available, show the empty text
-//                    noData.visibility = View.VISIBLE
-//                }else{
-//                    //if data is available, don't show the empty text
-//                    noData.visibility = View.GONE
-//
-//                    for ((idx, item) in transactions.withIndex()) {
-//                        mutableDate = LocalDateTime.parse(item.date)
-//                        sorted.add(idx + count, TransactionSummary(0, 0, mutableDate))
-//                        temp = sorted[idx + count] as TransactionSummary
-//                        count = 0
-//                        for ((i, trans) in transactions.withIndex()) {
-//                            if (mutableDate == LocalDateTime.parse(trans.date)) {
-//                                if (trans.isIncome) temp.income += trans.amount
-//                                else temp.expense += trans.amount
-//                                sorted.add(trans)
-//                                count += i
-//                            }
-//                        }
-//                    }
-//                    layoutManager = LinearLayoutManager(activity)
-////                    adapter = TransactionListAdapter(sorted.distinct())
-//                }
-//
-//            }
-//        }
-//        configureViewModel()
     }
-
-//    private fun configureViewModel() {
-//        val adapter = TransactionMainAdapter()
-//        rvTransactionList.adapter = adapter
-//        rvTransactionList.layoutManager = LinearLayoutManager(requireContext())
-//
-//        transactionViewModel.transactionList.observe(viewLifecycleOwner, Observer {
-//            adapter.setDataList(it)
-//        })
-//    }
 
     private fun initUICallBack() {
         fabAddTransaction.setOnClickListener {
