@@ -17,7 +17,6 @@ class TransactionMainAdapter : RecyclerView.Adapter<ViewHolder>() {
     private var onItemSwipeListener: OnItemSwipeListener? = null
 
     var data : List<TransactionSummary> = listOf()
-//    val adapter : TransactionSubAdapter = TransactionSubAdapter()
     val viewPool = RecyclerView.RecycledViewPool()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -26,7 +25,6 @@ class TransactionMainAdapter : RecyclerView.Adapter<ViewHolder>() {
         val day = view.tvTransactionDay
         val income = view.tvTransactionIncome
         val expense = view.tvTransactionExpense
-//        val data = view.rvSubItems
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -50,11 +48,9 @@ class TransactionMainAdapter : RecyclerView.Adapter<ViewHolder>() {
         holder.itemView.tag = position
         holder.itemView.setOnClickListener {  }
         val childAdapter = TransactionSubAdapter(data[position].data)
-//        holder.itemView.rvSubItems.adapter = adapter
-//        holder.itemView.rvSubItems.setRecycledViewPool(viewPool)
+
         val childLayoutManager = LinearLayoutManager(holder.itemView.rvSubItems.context,
             RecyclerView.VERTICAL, false)
-//        holder.itemView.rvSubItems.layoutManager = childLayoutManager
         holder.itemView.rvSubItems.apply {
             layoutManager = childLayoutManager
             adapter = childAdapter
@@ -83,7 +79,6 @@ class TransactionMainAdapter : RecyclerView.Adapter<ViewHolder>() {
                 }
             ).attachToRecyclerView(this)
         }
-//        adapter.setDataList(data[position].data)
     }
 
     fun setDataList(list : List<Transaction>) {

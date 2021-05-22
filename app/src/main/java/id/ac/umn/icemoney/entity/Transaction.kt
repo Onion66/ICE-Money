@@ -14,5 +14,4 @@ data class Transaction(
     @ColumnInfo(name = "is_income")         val isIncome: Boolean = true,
     @ColumnInfo(name = "name")              val name: String,
     @ColumnInfo(name = "payment_method")    val paymentMethod: String,
-    @ColumnInfo(name = "note")              val note: String? = ""
 ) : Serializable

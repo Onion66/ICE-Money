@@ -9,6 +9,5 @@ data class Transaction(
     var date: String,
     var isIncome: Boolean = true,
     var name: String,
-    var paymentMethod: String,
-    var note: String? = ""
+    var paymentMethod: String
 )

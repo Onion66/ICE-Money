@@ -5,7 +5,6 @@ import androidx.lifecycle.*
 import id.ac.umn.icemoney.database.DataModule
 import id.ac.umn.icemoney.entity.Transaction
 import id.ac.umn.icemoney.repository.TransactionRepo
-import id.ac.umn.icemoney.utils.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

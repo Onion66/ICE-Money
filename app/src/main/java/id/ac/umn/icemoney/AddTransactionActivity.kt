@@ -28,7 +28,6 @@ import java.util.*
 
 class AddTransactionActivity : AppCompatActivity() {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<FrameLayout>
-//    private lateinit var transactionViewModel: TransactionViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,13 +40,6 @@ class AddTransactionActivity : AppCompatActivity() {
         tvInputAddTransactionDate.text = currentDate.format(formatTime)
 
         initBottomSheet()
-
-//        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager, bottomSheetBehavior)
-//        val viewPager: ViewPager = findViewById(R.id.view_pager)
-//        viewPager.adapter = sectionsPagerAdapter
-//        val tabs: TabLayout = findViewById(R.id.tabs)
-//        tabs.setupWithViewPager(viewPager)
-//        val fab: FloatingActionButton = findViewById(R.id.fab)
 
         // Event Listeners Here
         initUICallBack()
@@ -62,14 +54,6 @@ class AddTransactionActivity : AppCompatActivity() {
         bottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-//                when (newState) {
-//                    BottomSheetBehavior.STATE_COLLAPSED -> fabSaveTransaction.visibility = View.VISIBLE
-//                    BottomSheetBehavior.STATE_EXPANDED -> fabSaveTransaction.visibility = View.GONE
-//                    BottomSheetBehavior.STATE_DRAGGING -> fabSaveTransaction.visibility = View.VISIBLE
-//                    BottomSheetBehavior.STATE_SETTLING -> Toast.makeText(this@AddTransactionActivity, "STATE_SETTLING", Toast.LENGTH_SHORT).show()
-//                    BottomSheetBehavior.STATE_HIDDEN -> fabSaveTransaction.visibility = View.VISIBLE
-//                    else -> Toast.makeText(this@AddTransactionActivity, "OTHER_STATE", Toast.LENGTH_SHORT).show()
-//                }
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
