@@ -16,6 +16,8 @@ class UpdateTransactionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_transaction)
 
+        tvTitle.text = "Ubah Transaksi"
+
         val id : String
 
         if (intent.hasExtra("data")) {

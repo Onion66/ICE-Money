@@ -6,7 +6,7 @@
         <entry key="../../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bottom_sheet_background.xml" value="0.33489583333333334" />
         <entry key="app/src/main/res/layout/activity_about_us.xml" value="0.30570652173913043" />
-        <entry key="app/src/main/res/layout/activity_add_transaction.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_add_transaction.xml" value="0.1" />
         <entry key="app/src/main/res/layout/bottom_sheet_payment_method.xml" value="0.30570652173913043" />
         <entry key="app/src/main/res/layout/fragment_add_expense.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_add_income.xml" value="0.1734375" />
