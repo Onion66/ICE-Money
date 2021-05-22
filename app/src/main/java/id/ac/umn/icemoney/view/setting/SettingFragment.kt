@@ -176,6 +176,7 @@ class SettingFragment : Fragment() {
         val submitBtn: Button = root.findViewById(R.id.submitButton)
         submitBtn.setOnClickListener { view ->
             try{
+                transactionViewModel.deleteAll()
                 FirebaseAuth.getInstance().signOut()
                 // Redirecting into Login page
                 Intent(activity, LoginActivity::class.java).also{
