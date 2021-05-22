@@ -51,6 +51,7 @@ class SettingFragment : Fragment() {
     val REQUEST_VIDEO_CAPTURE = 2
 
     private lateinit var transactionViewModel: TransactionViewModel
+    private lateinit var gambarUserImage: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,7 +63,7 @@ class SettingFragment : Fragment() {
         val id = FirebaseAuth.getInstance().currentUser.uid
 
         // Set Image User
-        val gambarUserImage: ImageView = root.findViewById(R.id.gambarUser)
+        gambarUserImage = root.findViewById(R.id.gambarUser)
         database.child("gambarProfile").child(id).get().addOnSuccessListener {
             Log.i("urlGambar", it.value.toString())
             Log.i("id", id)
@@ -270,6 +271,13 @@ class SettingFragment : Fragment() {
                 val id = FirebaseAuth.getInstance().currentUser.uid
                 // Simpan ke firebase
                 database.child("gambarProfile").child(id).setValue(linkUploaded).addOnSuccessListener {
+                    val options: RequestOptions = RequestOptions()
+                        .centerCrop()
+                        .placeholder(R.drawable.empty)
+                        .error(R.drawable.empty)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .priority(Priority.HIGH)
+                    Glide.with(requireView()).load(linkUploaded).apply(options).into(gambarUserImage)
                     // Snackbar notification
                     Snackbar.make(requireView(), "Sukses menyimpan gambar", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show()
