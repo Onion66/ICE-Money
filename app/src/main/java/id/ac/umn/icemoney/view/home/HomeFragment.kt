@@ -57,7 +57,7 @@ class HomeFragment : Fragment() {
             }
         })
 
-        transactionViewModel.transactionList.observe(this, {
+        transactionViewModel.transactionList.observe(viewLifecycleOwner, {
             transactionAdapter?.setDataList(it)
 
             // No Data Image

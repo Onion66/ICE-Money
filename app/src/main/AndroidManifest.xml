@@ -27,9 +27,6 @@
             android:name=".UpdateTransactionActivity"
             android:label="Ubah Transaksi"
             android:theme="@style/Theme.ICEMoney.NoActionBar" />
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_home" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".HomeActivity" />
