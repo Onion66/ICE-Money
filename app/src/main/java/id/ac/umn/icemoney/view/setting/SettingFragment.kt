@@ -80,7 +80,6 @@ class SettingFragment : Fragment() {
         emailUserText.text = FirebaseAuth.getInstance().currentUser.email
 
         // Ganti Gambar
-        val idFirebase = database.push().key.toString()
         val gantiGambarButton: Button = root.findViewById(R.id.gantiGambar)
         gantiGambarButton.setOnClickListener { view ->
             Intent(MediaStore.ACTION_IMAGE_CAPTURE).also {
@@ -267,19 +266,18 @@ class SettingFragment : Fragment() {
                 val linkUploaded = data.getString("link")
                 Log.d("TAG", "Link is : ${linkUploaded}")
 
-//                val database = FirebaseDatabase.getInstance().reference
-//                val id = FirebaseAuth.getInstance().currentUser.uid
-
-//                // Simpan ke firebase
-//                database.child("gambarProfile").child(id).child(idFirebase!!).setValue(linkUploaded).addOnSuccessListener {
-//                    // Snackbar notification
-//                    Snackbar.make(requireView(), "Sukses menyimpan gambar", Snackbar.LENGTH_SHORT)
-//                        .setAction("Action", null).show()
-//                }.addOnFailureListener{
-//                    // Snackbar notification
-//                    Snackbar.make(requireView(), "Gagal menyimpan gambar ke internet", Snackbar.LENGTH_SHORT)
-//                        .setAction("Action", null).show()
-//                }
+                val database = FirebaseDatabase.getInstance().reference
+                val id = FirebaseAuth.getInstance().currentUser.uid
+                // Simpan ke firebase
+                database.child("gambarProfile").child(id).setValue(linkUploaded).addOnSuccessListener {
+                    // Snackbar notification
+                    Snackbar.make(requireView(), "Sukses menyimpan gambar", Snackbar.LENGTH_SHORT)
+                        .setAction("Action", null).show()
+                }.addOnFailureListener{
+                    // Snackbar notification
+                    Snackbar.make(requireView(), "Gagal menyimpan gambar ke internet", Snackbar.LENGTH_SHORT)
+                        .setAction("Action", null).show()
+                }
 
                 Snackbar.make(requireView(), "Sukses menyimpan gambar", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show()
